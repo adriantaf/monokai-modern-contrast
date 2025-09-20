@@ -1,41 +1,44 @@
 > old:
-"editor.background": #272822,
-"sideBar.background": "#1e1f1c",
+  "editor.background": #272822,
+  "sideBar.background": "#1e1f1c",
 
-"tab.activeBorderTop": null,
-"tab.inactiveBackground": "#34352f",
-"tab.activeBackground": "#272822",
+  "tab.activeBorderTop": null,
+  "tab.inactiveBackground": "#34352f",
+  "tab.activeBackground": "#272822",
 
-"statusBar.background": "#414339",
+  "statusBar.background": "#414339",
 
-red: #F92672
+  red: #F92672
 
 > new:
-"editor.background": "#1a1b17",
-"sideBar.background": "#151614",
+  "editor.background": "#1a1b17",
+  "sideBar.background": "#151614",
 
-"tab.activeBorderTop": "#6a7ec8",
-"tab.inactiveBackground": "#1a1b17",
-"tab.activeBackground": "#30312a",
+  "tab.activeBorderTop": "#6a7ec8",
+  "tab.inactiveBackground": "#1a1b17",
+  "tab.activeBackground": "#30312a",
 
-"statusBar.background": "#2e3027",
+  "statusBar.background": "#2e3027",
 
-red: #FF3A82
-3f3f3f
+  red: #FF3A82
 
-"terminal.ansiBlack": "#333333",
-"terminal.ansiBlue": "#6a7ec8",
-"terminal.ansiBrightBlack": "#666666",
-"terminal.ansiBrightBlue": "#819aff",
-"terminal.ansiBrightCyan": "#66d9ef",
-"terminal.ansiBrightGreen": "#a6e22e",
-"terminal.ansiBrightMagenta": "#ae81ff",
-"terminal.ansiBrightRed": "#FF3A82",
-"terminal.ansiBrightWhite": "#f8f8f2",
-"terminal.ansiBrightYellow": "#e2e22e",
-"terminal.ansiCyan": "#56adbc",
-"terminal.ansiGreen": "#86b42b",
-"terminal.ansiMagenta": "#8c6bc8",
-"terminal.ansiRed": "#c4265e",
-"terminal.ansiWhite": "#e3e3dd",
-"terminal.ansiYellow": "#b3b42b",
+> Border: #3f3f3f
+
+
+> Other:
+  "terminal.ansiBlack": "#333333",
+  "terminal.ansiBlue": "#6a7ec8",
+  "terminal.ansiBrightBlack": "#666666",
+  "terminal.ansiBrightBlue": "#819aff",
+  "terminal.ansiBrightCyan": "#66d9ef",
+  "terminal.ansiBrightGreen": "#a6e22e",
+  "terminal.ansiBrightMagenta": "#ae81ff",
+  "terminal.ansiBrightRed": "#FF3A82",
+  "terminal.ansiBrightWhite": "#f8f8f2",
+  "terminal.ansiBrightYellow": "#e2e22e",
+  "terminal.ansiCyan": "#56adbc",
+  "terminal.ansiGreen": "#86b42b",
+  "terminal.ansiMagenta": "#8c6bc8",
+  "terminal.ansiRed": "#c4265e",
+  "terminal.ansiWhite": "#e3e3dd",
+  "terminal.ansiYellow": "#b3b42b",
