@@ -1,0 +1,19 @@
+{
+  "name": "monokai-v2",
+  "displayName": "Monokai whit contrast",
+  "description": "A theme based on Monokai but with a higher contrast tone.",
+  "version": "1.0.0",
+  "publisher": "Adrian Tafoya",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Monokai whit contrast",
+        "uiTheme": "vs-dark",
+        "path": "./themes/monokai-with-contrast.json"
+      }
+    ]
+  }
+}
