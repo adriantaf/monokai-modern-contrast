@@ -1,9 +1,9 @@
 {
   "$schema": "vscode://schemas/color-theme",
   "type": "dark",
-  "name": "monokai-with-contrast",
-  "displayName": "Monokai With Contrast",
-  "publisher": "Adrian Tafoya",
+  "name": "monokai-modern-contrast",
+  "displayName": "Monokai Modern Contrast",
+  "publisher": "AdrianTafoya",
   "colors": {
     "activityBar.background": "#151614",
     "activityBar.foreground": "#f8f8f2",

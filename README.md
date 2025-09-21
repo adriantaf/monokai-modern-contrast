@@ -1,9 +1,9 @@
-# 👽 Monokai With Contrast
+# 👽 Monokai Modern Contrast
 
 A Visual Studio Code theme inspired by **Monokai**, with a more modern style and a personalized touch.
 Perfect for those who enjoy vibrant colors on a dark background.
 
-![Preview](./res/screenshot.png)
+![Preview](https://raw.githubusercontent.com/adriantaf/monokai-modern-contrast/refs/heads/main/res/screenshot.png)
 
 ## ✨ Features
 

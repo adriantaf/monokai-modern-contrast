@@ -1,27 +1,28 @@
 {
-  "name": "monokai-with-contrast",
-  "displayName": "Monokai With Contrast",
+  "name": "monokai-modern-contrast",
+  "displayName": "Monokai Modern Contrast",
   "description": "A Visual Studio Code theme inspired by 'Monokai', with a more modern style and a personalized touch. Perfect for those who enjoy vibrant colors on a dark background.",
   "version": "1.0.0",
-  "publisher": "Adrian Tafoya",
+  "publisher": "AdrianTafoya",
   "engines": {
     "vscode": "^1.50.0"
   },
   "categories": [
     "Themes"
   ],
-  "icon": "./res/icon.png",
+  "icon": "res/icon.png",
   "contributes": {
     "themes": [
       {
-        "label": "Monokai With Contrast",
+        "label": "Monokai Modern Contrast",
         "uiTheme": "vs-dark",
-        "path": "./themes/monokai-with-contrast.json"
+        "path": "./themes/monokai-modern-contrast.json"
       }
     ]
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adriantaf/monokai-with-contrast.git"
-  }
+    "url": "https://github.com/adriantaf/monokai-modern-contrast.git"
+  },
+  "license": "MIT"
 }
