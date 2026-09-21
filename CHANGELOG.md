@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.2
+
+- Package the README preview image so Marketplace shows the current screenshot
+
 ## 1.1.1
 
 - Restore classic Monokai pink (`#F92672`) and leave operators uncolored

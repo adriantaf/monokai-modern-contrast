@@ -4,7 +4,7 @@ Classic Monokai on the code. A quiet olive workbench around it.
 
 The six Monokai colors stay where they belong — keywords, strings, types, functions, numbers, parameters. Everything else stays paper. Chrome is olive, not neon.
 
-![Preview](https://raw.githubusercontent.com/adriantaf/monokai-modern-contrast/refs/heads/main/res/screenshot.png)
+![Preview](./res/screenshot.png)
 
 ## Install
 
