@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3
+
+- Update the Marketplace icon
+
 ## 1.1.2
 
 - Package the README preview image so Marketplace shows the current screenshot
