@@ -14,24 +14,24 @@ ext install AdrianTafoya.monokai-modern-contrast
 
 ## vs classic Monokai
 
-- Deeper olive chrome so the editor sits one step above the UI
-- Flat workbench with a single blue accent (`#6A7EC8`)
-- Pink reserved for code and errors, not badges and tabs
+- Slightly deeper olive chrome so the editor sits above the UI
+- Quiet workbench: olive badges and tabs, no neon stickers
+- Classic keyword pink (`#F92672`); operators stay paper
 
 ## Palette
 
 | Token | Hex |
 | --- | --- |
-| Background | `#151614` / `#1A1B17` |
-| Foreground | `#EFEFE9` |
-| Keyword | `#FF3A82` |
+| Background | `#1A1B17` / `#1E1F1C` |
+| Foreground | `#F8F8F2` |
+| Keyword | `#F92672` |
 | String | `#E6DB74` |
 | Function | `#A6E22E` |
 | Type | `#66D9EF` |
 | Number | `#AE81FF` |
 | Parameter | `#FD971F` |
-| Comment | `#88846F` |
-| Accent | `#6A7EC8` |
+| Comment | `#75715E` |
+| Accent | `#75715E` |
 
 ## Recommended
 

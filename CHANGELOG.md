@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+- Restore classic Monokai pink (`#F92672`) and leave operators uncolored
+- Quiet olive chrome; no blue/pink UI stickers
+- Lift the editor slightly so syntax does not go neon on near-black
+
 ## 1.1.0
 
 - Unify the workbench to the Monokai palette (no leftover Dark+ blues and grays)
