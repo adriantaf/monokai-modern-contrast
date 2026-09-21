@@ -1,12 +1,49 @@
-# 👽 Monokai Modern Contrast
+# Monokai Modern Contrast
 
-A Visual Studio Code theme inspired by **Monokai**, with a more modern style and a personalized touch.
-Perfect for those who enjoy vibrant colors on a dark background.
+Classic Monokai syntax. Quieter olive workbench.
 
 ![Preview](https://raw.githubusercontent.com/adriantaf/monokai-modern-contrast/refs/heads/main/res/screenshot.png)
 
-## ✨ Features
+## Install
 
-- 🎨 Based on the classic Monokai color palette.
-- 🖥️ Compatible with VS Code on Windows, macOS, and Linux.
-- 🔍 Syntax support for multiple languages (PHP, JavaScript, Python, Dart, etc.).
+In VS Code or Cursor: **Extensions** → search `Monokai Modern Contrast` → Install, then select it from **Color Theme**.
+
+```
+ext install AdrianTafoya.monokai-modern-contrast
+```
+
+## vs classic Monokai
+
+- Deeper olive chrome so the editor sits one step above the UI
+- Flat workbench with a single blue accent (`#6A7EC8`)
+- Pink reserved for code and errors, not badges and tabs
+
+## Palette
+
+| Token | Hex |
+| --- | --- |
+| Background | `#151614` / `#1A1B17` |
+| Foreground | `#EFEFE9` |
+| Keyword | `#FF3A82` |
+| String | `#E6DB74` |
+| Function | `#A6E22E` |
+| Type | `#66D9EF` |
+| Number | `#AE81FF` |
+| Parameter | `#FD971F` |
+| Comment | `#88846F` |
+| Accent | `#6A7EC8` |
+
+## Recommended
+
+```json
+{
+  "workbench.colorTheme": "Monokai Modern Contrast",
+  "editor.semanticHighlighting.enabled": true
+}
+```
+
+## License
+
+MIT
+
+A theme by [Bektor](https://bektor.tech)

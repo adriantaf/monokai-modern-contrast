@@ -1,15 +1,32 @@
 {
   "name": "monokai-modern-contrast",
   "displayName": "Monokai Modern Contrast",
-  "description": "A Visual Studio Code theme inspired by 'Monokai', with a more modern style and a personalized touch. Perfect for those who enjoy vibrant colors on a dark background.",
-  "version": "1.0.0",
+  "description": "Classic Monokai on a quieter olive workbench. Subtle contrast, not a neon reskin.",
+  "version": "1.1.0",
   "publisher": "AdrianTafoya",
+  "author": {
+    "name": "Bektor",
+    "url": "https://bektor.tech"
+  },
+  "homepage": "https://bektor.tech",
   "engines": {
     "vscode": "^1.50.0"
   },
   "categories": [
     "Themes"
   ],
+  "keywords": [
+    "monokai",
+    "dark",
+    "theme",
+    "olive",
+    "contrast",
+    "modern"
+  ],
+  "galleryBanner": {
+    "color": "#151614",
+    "theme": "dark"
+  },
   "icon": "res/icon.png",
   "contributes": {
     "themes": [
@@ -23,6 +40,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/adriantaf/monokai-modern-contrast.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adriantaf/monokai-modern-contrast/issues"
   },
   "license": "MIT"
 }
