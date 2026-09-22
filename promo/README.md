@@ -1,34 +1,24 @@
 # Promo — Monokai Modern Contrast
 
-Piezas para difusión del tema (landing SaaS + reel corto).
+Landing editorial + reel (inspiración tipográfica tipo Awwwards / specimen).
 
 ## Idioma (ES / EN)
 
-El texto se elige por **ubicación** (país hispanohablante → español; resto → inglés), con fallback al idioma del navegador.
+Por ubicación (país hispanohablante → ES), fallback al navegador.
 
-- Forzar: `?lang=es` o `?lang=en`
-- Alternar en la landing con el botón ES/EN (queda guardado)
+- `?lang=es` / `?lang=en`
+- Toggle ES/EN en la barra
 
-## Abrir en local
+## Abrir
 
 ```bash
 npx --yes serve promo -l 4173
 ```
 
-- Landing: http://localhost:4173/
-- Reel 16:9: http://localhost:4173/reel
-- Español: http://localhost:4173/?lang=es
-- English: http://localhost:4173/?lang=en
+## Dirección visual
 
-## Assets
-
-| Archivo | Uso |
-| --- | --- |
-| `index.html` | Landing promocional |
-| `reel.html` | Secuencia automática para video |
-| `reel.mp4` | Clip ~14s listo para redes |
-| `i18n.js` | Detección de idioma + strings ES/EN |
-| `hero.png` | Hero full-bleed |
-| `preview.png` | Captura real del tema |
-| `social.png` | Cuadrado para redes |
-| `icon.png` | Icono de la extensión |
+- Tipografía cinética **Syne**: MONOKAI con letras en la paleta
+- Hero full-bleed del editor + marca como señal principal
+- Specimen de tokens (no cards)
+- Terminal interactivo para copiar el install
+- Marquee de hex + motion (letters, drift, blink)

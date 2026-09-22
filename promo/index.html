@@ -1,532 +1,496 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Monokai Modern Contrast — Classic Monokai. Quieter chrome.</title>
-  <meta name="description" content="Classic Monokai on the code. A quiet olive workbench around it. Tema gratis para VS Code y Cursor." />
+  <title>Monokai Modern Contrast</title>
+  <meta name="description" content="Classic Monokai on the code. Quiet olive chrome. Free theme for VS Code and Cursor." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-deep: #121310;
-      --bg: #1a1b17;
-      --bg-editor: #1e1f1c;
+      --ink: #0c0d0b;
+      --olive: #1a1b17;
+      --editor: #1e1f1c;
       --paper: #f8f8f2;
-      --muted: #99947c;
-      --comment: #75715e;
+      --mute: #8a8570;
+      --line: rgba(248, 248, 242, 0.12);
       --pink: #f92672;
       --yellow: #e6db74;
       --green: #a6e22e;
       --cyan: #66d9ef;
       --orange: #fd971f;
-      --purple: #ae81ff;
-      --olive-line: rgba(117, 113, 94, 0.35);
-      --font-display: "Fraunces", Georgia, serif;
-      --font-body: "Outfit", sans-serif;
-      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+      --violet: #ae81ff;
+      --comment: #75715e;
+      --display: "Syne", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: var(--font-body);
-      background: var(--bg-deep);
+      font-family: var(--mono);
+      background: var(--ink);
       color: var(--paper);
-      line-height: 1.5;
+      line-height: 1.45;
       overflow-x: hidden;
     }
-
     a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    img { display: block; max-width: 100%; }
 
-    /* Atmosphere */
-    .grain {
-      pointer-events: none;
+    /* ── Top index bar (Awwwards portfolio pattern) ── */
+    .bar {
       position: fixed;
-      inset: 0;
-      z-index: 50;
-      opacity: 0.045;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    /* Nav */
-    .nav {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
+      inset: 0 0 auto 0;
+      z-index: 40;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.25rem 1.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--line);
+      background: rgba(12, 13, 11, 0.72);
+      backdrop-filter: blur(10px);
     }
-
-    .nav-brand {
+    .bar-brand {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+    }
+    .bar-nav {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.02em;
-      color: var(--muted);
-      opacity: 0;
-      animation: rise 0.8s 0.1s ease forwards;
-    }
-
-    .nav-brand img {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-      opacity: 0;
-      animation: rise 0.8s 0.2s ease forwards;
-    }
-
-    .lang-toggle {
-      font-family: var(--font-mono);
+      gap: 1.25rem;
       font-size: 0.72rem;
       letter-spacing: 0.08em;
-      color: var(--muted);
-      background: transparent;
-      border: 1px solid var(--olive-line);
-      padding: 0.45rem 0.65rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: color 0.2s ease, border-color 0.2s ease;
+      text-transform: uppercase;
+      color: var(--mute);
     }
-
-    .lang-toggle:hover {
-      color: var(--paper);
-      border-color: var(--comment);
+    .bar-nav a:hover,
+    .lang-toggle:hover { color: var(--paper); }
+    .lang-toggle {
+      letter-spacing: 0.12em;
+      color: var(--mute);
+      padding: 0.2rem 0;
+      border-bottom: 1px solid transparent;
     }
+    .lang-toggle:hover { border-bottom-color: var(--paper); }
 
-    .nav-cta {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--bg-deep);
-      background: var(--green);
-      padding: 0.55rem 1rem;
-      border-radius: 4px;
-      transition: transform 0.2s ease, filter 0.2s ease;
-    }
-
-    .nav-cta:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.05);
-    }
-
-    /* Hero — one composition */
+    /* ── Hero: one composition, brand as the visual ── */
     .hero {
       position: relative;
       min-height: 100svh;
       display: grid;
-      align-items: end;
+      grid-template-rows: 1fr auto;
       isolation: isolate;
+      padding-top: 3.25rem;
     }
-
-    .hero-media {
+    .hero-plane {
       position: absolute;
       inset: 0;
       z-index: -1;
       overflow: hidden;
     }
-
-    .hero-media img {
+    .hero-plane img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 30%;
-      transform: scale(1.06);
-      animation: kenburns 18s ease-out forwards;
-      filter: saturate(1.05) brightness(0.72);
+      object-position: 60% 35%;
+      transform: scale(1.04);
+      animation: drift 22s ease-in-out infinite alternate;
+      filter: saturate(1.1) contrast(1.05) brightness(0.42);
     }
-
-    .hero-media::after {
+    .hero-plane::after {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(18, 19, 16, 0.35) 0%, rgba(18, 19, 16, 0.15) 35%, rgba(18, 19, 16, 0.92) 78%, var(--bg-deep) 100%),
-        radial-gradient(ellipse 80% 55% at 70% 40%, transparent 0%, rgba(18, 19, 16, 0.55) 100%);
+        linear-gradient(180deg, rgba(12,13,11,0.55) 0%, transparent 28%, rgba(12,13,11,0.35) 55%, var(--ink) 100%),
+        radial-gradient(ellipse 90% 70% at 50% 20%, transparent 20%, rgba(12,13,11,0.65) 100%);
     }
 
-    .hero-copy {
-      max-width: 1200px;
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem 1.25rem 1.5rem;
+      max-width: 1400px;
       width: 100%;
       margin: 0 auto;
-      padding: 0 1.5rem 4.5rem;
     }
 
-    .brand {
-      font-family: var(--font-display);
-      font-weight: 650;
-      font-size: clamp(2.6rem, 7.5vw, 5.4rem);
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      margin-bottom: 1.1rem;
+    .mega {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(3.4rem, 14vw, 11.5rem);
+      line-height: 0.82;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .mega span {
+      display: inline-block;
       opacity: 0;
-      animation: rise 0.9s 0.25s ease forwards;
+      transform: translateY(0.35em);
+      animation: letterIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+    .mega span:nth-child(1) { color: var(--pink); animation-delay: 0.05s; }
+    .mega span:nth-child(2) { color: var(--yellow); animation-delay: 0.1s; }
+    .mega span:nth-child(3) { color: var(--green); animation-delay: 0.15s; }
+    .mega span:nth-child(4) { color: var(--cyan); animation-delay: 0.2s; }
+    .mega span:nth-child(5) { color: var(--orange); animation-delay: 0.25s; }
+    .mega span:nth-child(6) { color: var(--violet); animation-delay: 0.3s; }
+    .mega span:nth-child(7) { color: var(--paper); animation-delay: 0.35s; }
 
-    .brand span {
-      display: block;
-      color: var(--muted);
+    .subbrand {
+      margin-top: 0.55rem;
+      font-family: var(--display);
       font-weight: 500;
-      font-size: 0.52em;
-      letter-spacing: -0.01em;
-      margin-top: 0.15em;
-    }
-
-    .headline {
-      font-family: var(--font-body);
-      font-weight: 500;
-      font-size: clamp(1.15rem, 2.4vw, 1.45rem);
-      max-width: 28ch;
-      color: var(--paper);
-      margin-bottom: 0.65rem;
+      font-size: clamp(1.1rem, 3.2vw, 2rem);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--mute);
       opacity: 0;
-      animation: rise 0.9s 0.4s ease forwards;
+      animation: fadeUp 0.8s 0.55s ease forwards;
     }
 
+    .hero-meta {
+      display: grid;
+      gap: 1.25rem;
+      margin-top: 2rem;
+      max-width: 34rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s ease forwards;
+    }
+    @media (min-width: 720px) {
+      .hero-meta {
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        max-width: none;
+      }
+    }
     .lede {
-      font-size: 1.02rem;
-      color: var(--muted);
-      max-width: 38ch;
-      margin-bottom: 1.75rem;
-      opacity: 0;
-      animation: rise 0.9s 0.5s ease forwards;
+      font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+      color: var(--paper);
+      max-width: 28ch;
+      font-family: var(--mono);
     }
-
     .cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.75rem 1.25rem;
       align-items: center;
-      opacity: 0;
-      animation: rise 0.9s 0.62s ease forwards;
     }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--pink);
-      color: #fff;
-      font-weight: 600;
+    .cta-main {
+      font-family: var(--display);
+      font-weight: 700;
       font-size: 0.95rem;
-      padding: 0.85rem 1.35rem;
-      border-radius: 4px;
-      transition: transform 0.2s ease, filter 0.2s ease;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      background: var(--pink);
+      padding: 0.75rem 1.15rem;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.08);
+    .cta-main:hover {
+      background: var(--green);
+      transform: translateY(-2px);
     }
-
-    .btn-ghost {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--muted);
-      border: 1px solid var(--olive-line);
-      padding: 0.8rem 1.1rem;
-      border-radius: 4px;
-      transition: color 0.2s ease, border-color 0.2s ease;
+    .cta-ghost {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mute);
+      border-bottom: 1px solid var(--mute);
+      padding-bottom: 0.15rem;
     }
+    .cta-ghost:hover { color: var(--paper); border-color: var(--paper); }
 
-    .btn-ghost:hover {
-      color: var(--paper);
-      border-color: var(--comment);
+    .marquee-wrap {
+      border-block: 1px solid var(--line);
+      overflow: hidden;
+      background: rgba(12, 13, 11, 0.85);
     }
-
-    /* Palette strip */
-    .palette {
+    .marquee {
       display: flex;
-      gap: 0.45rem;
-      margin-top: 2rem;
-      opacity: 0;
-      animation: rise 0.9s 0.75s ease forwards;
-    }
-
-    .swatch {
-      width: 14px;
-      height: 14px;
-      border-radius: 3px;
-      transform-origin: center;
-      animation: pulse 3.2s ease-in-out infinite;
-    }
-
-    .swatch:nth-child(1) { background: var(--pink); animation-delay: 0s; }
-    .swatch:nth-child(2) { background: var(--yellow); animation-delay: 0.15s; }
-    .swatch:nth-child(3) { background: var(--green); animation-delay: 0.3s; }
-    .swatch:nth-child(4) { background: var(--cyan); animation-delay: 0.45s; }
-    .swatch:nth-child(5) { background: var(--orange); animation-delay: 0.6s; }
-    .swatch:nth-child(6) { background: var(--purple); animation-delay: 0.75s; }
-
-    /* Sections */
-    section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 5.5rem 1.5rem;
-    }
-
-    .section-label {
-      font-family: var(--font-mono);
+      width: max-content;
+      gap: 0;
+      animation: marquee 28s linear infinite;
       font-size: 0.72rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
+      color: var(--mute);
+      padding: 0.7rem 0;
+      white-space: nowrap;
+    }
+    .marquee span { padding-right: 2.5rem; }
+
+    /* ── Sections ── */
+    .block {
+      padding: 5rem 1.25rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       color: var(--comment);
-      margin-bottom: 0.85rem;
+      margin-bottom: 1rem;
     }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-weight: 650;
-      font-size: clamp(1.8rem, 4vw, 2.75rem);
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      max-width: 16ch;
-      margin-bottom: 0.75rem;
+    .display-title {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 7vw, 5.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      white-space: pre-line;
+      max-width: 12ch;
+      margin-bottom: 1rem;
     }
-
-    .section-copy {
-      color: var(--muted);
-      max-width: 48ch;
-      font-size: 1.05rem;
+    .copy {
+      color: var(--mute);
+      max-width: 42ch;
+      font-size: 0.92rem;
       margin-bottom: 2.5rem;
     }
 
-    .preview-wrap {
-      position: relative;
-      border: 1px solid var(--olive-line);
-      border-radius: 8px;
+    .bleed {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      border-block: 1px solid var(--line);
       overflow: hidden;
-      background: var(--bg);
-      box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.65);
+      background: var(--olive);
     }
-
-    .preview-wrap img {
-      display: block;
+    .bleed img {
       width: 100%;
       height: auto;
+      display: block;
+      transform: scale(1.01);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    .bleed:hover img { transform: scale(1.03); }
 
-    .compare {
+    /* Token specimen — horizontal type samples, not cards */
+    .tokens {
       display: grid;
-      gap: 2rem;
+      gap: 0;
+      border-top: 1px solid var(--line);
     }
-
-    @media (min-width: 800px) {
-      .compare {
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        align-items: start;
-      }
-    }
-
-    .compare-item h3 {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--comment);
-      margin-bottom: 0.85rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .token-list {
-      list-style: none;
+    .token {
       display: grid;
-      gap: 0.55rem;
-      font-family: var(--font-mono);
-      font-size: 0.88rem;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: baseline;
+      padding: 1.35rem 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding-left 0.35s ease;
+    }
+    .token:hover { padding-left: 0.75rem; }
+    .token-name {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(1.8rem, 5vw, 3.6rem);
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+      line-height: 1;
+    }
+    .token-hex {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--mute);
     }
 
-    .token-list li {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.55rem 0;
-      border-bottom: 1px solid var(--olive-line);
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
-      flex-shrink: 0;
-    }
-
-    .token-name { color: var(--paper); }
-    .token-hex { color: var(--comment); margin-left: auto; }
-
+    /* Install terminal — interactive */
     .install {
+      min-height: 70svh;
+      display: grid;
+      align-content: center;
+      padding: 5rem 1.25rem;
       background:
-        radial-gradient(ellipse 60% 80% at 10% 50%, rgba(249, 38, 114, 0.08), transparent 55%),
-        radial-gradient(ellipse 50% 70% at 90% 40%, rgba(166, 226, 46, 0.06), transparent 50%),
-        var(--bg);
-      border-block: 1px solid var(--olive-line);
+        radial-gradient(ellipse 70% 55% at 50% 40%, rgba(249, 38, 114, 0.1), transparent 60%),
+        var(--ink);
+      border-top: 1px solid var(--line);
     }
-
     .install-inner {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 5.5rem 1.5rem;
+      width: 100%;
+    }
+    .terminal {
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 48rem;
+      text-align: left;
+      border: 1px solid var(--line);
+      background: var(--olive);
+      padding: 1.25rem 1.35rem;
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .terminal:hover { border-color: var(--pink); }
+    .terminal .cmd { color: var(--green); }
+    .terminal .pkg { color: var(--cyan); }
+    .terminal .cursor {
+      display: inline-block;
+      width: 0.55em;
+      height: 1.05em;
+      background: var(--pink);
+      margin-left: 0.15em;
+      vertical-align: text-bottom;
+      animation: blink 1.05s steps(1) infinite;
+    }
+    .terminal-hint {
+      margin-top: 0.75rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mute);
     }
 
-    .code-block {
-      font-family: var(--font-mono);
-      font-size: 0.9rem;
-      background: var(--bg-deep);
-      border: 1px solid var(--olive-line);
-      border-radius: 6px;
-      padding: 1.15rem 1.25rem;
-      color: var(--yellow);
-      overflow-x: auto;
-      max-width: 42rem;
-    }
-
-    .code-block .cmd { color: var(--green); }
-    .code-block .pkg { color: var(--cyan); }
-
-    .footer {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem 3rem;
+    .foot {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
       justify-content: space-between;
-      align-items: center;
-      color: var(--comment);
-      font-size: 0.85rem;
+      gap: 1rem;
+      padding: 1.5rem 1.25rem 2rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mute);
+      max-width: 1400px;
+      margin: 0 auto;
     }
-
-    .footer a:hover { color: var(--paper); }
+    .foot a:hover { color: var(--paper); }
 
     .reveal {
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
-    .reveal.visible {
+    .reveal.on {
       opacity: 1;
       transform: none;
     }
 
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(16px); }
+    @keyframes letterIn {
       to { opacity: 1; transform: none; }
     }
-
-    @keyframes kenburns {
-      from { transform: scale(1.06) translate(0, 0); }
-      to { transform: scale(1.12) translate(-1.5%, -1%); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes drift {
+      from { transform: scale(1.04) translate(0, 0); }
+      to { transform: scale(1.1) translate(-1.5%, -1.2%); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.85; }
-      50% { transform: scale(1.15); opacity: 1; }
+    @media (max-width: 640px) {
+      .bar-nav a:not(.lang-toggle) { display: none; }
+      .mega { font-size: clamp(3.2rem, 18vw, 5rem); }
+      .subbrand { letter-spacing: 0.16em; }
     }
   </style>
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-
-  <header class="nav">
-    <a class="nav-brand" href="#top">
-      <img src="./icon.png" alt="" width="28" height="28" />
-      Monokai Modern Contrast
-    </a>
-    <div class="nav-actions">
-      <button type="button" class="lang-toggle" id="langToggle" data-i18n="langSwitch" data-i18n-attr="aria-label:langSwitchAria" aria-label="Switch language">EN</button>
-      <a class="nav-cta" data-i18n="navInstall" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Install</a>
-    </div>
+  <header class="bar">
+    <a class="bar-brand" href="#top">Monokai</a>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="#top" data-i18n="navIndex">Index</a>
+      <a href="#palette" data-i18n="navPalette">Palette</a>
+      <a href="#install" data-i18n="navInstall">Install</a>
+      <button type="button" class="lang-toggle" id="langToggle" data-i18n="langSwitch" data-i18n-attr="aria-label:langSwitchAria">ES</button>
+    </nav>
   </header>
 
   <main id="top">
     <section class="hero" data-i18n-attr="aria-label:heroAria" aria-label="Home">
-      <div class="hero-media">
+      <div class="hero-plane">
         <img src="./hero.png" data-i18n-attr="alt:heroImgAlt" alt="Editor with Monokai Modern Contrast" width="1376" height="768" />
       </div>
-      <div class="hero-copy">
-        <h1 class="brand">
-          Monokai
-          <span>Modern Contrast</span>
+
+      <div class="hero-main">
+        <h1 class="mega" aria-label="Monokai">
+          <span>M</span><span>O</span><span>N</span><span>O</span><span>K</span><span>A</span><span>I</span>
         </h1>
-        <p class="headline" data-i18n="headline">Classic Monokai on the code. A quiet olive workbench around it.</p>
-        <p class="lede" data-i18n="lede">The six colors stay where they belong. Everything else stays paper. Olive chrome, not neon.</p>
-        <div class="cta-row">
-          <a class="btn-primary" data-i18n="ctaPrimary" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">
-            Install for VS Code / Cursor
-          </a>
-          <a class="btn-ghost" data-i18n="ctaGhost" href="#preview">See the theme</a>
+        <p class="subbrand" data-i18n="brandLine">Modern Contrast</p>
+
+        <div class="hero-meta">
+          <p class="lede" data-i18n="lede">The six colors stay where they belong. Everything else stays paper.</p>
+          <div class="cta-row">
+            <a class="cta-main" data-i18n="ctaPrimary" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Install theme</a>
+            <a class="cta-ghost" data-i18n="ctaGhost" href="#specimen">View specimen</a>
+          </div>
         </div>
-        <div class="palette" aria-hidden="true">
-          <span class="swatch"></span>
-          <span class="swatch"></span>
-          <span class="swatch"></span>
-          <span class="swatch"></span>
-          <span class="swatch"></span>
-          <span class="swatch"></span>
+      </div>
+
+      <div class="marquee-wrap" aria-hidden="true">
+        <div class="marquee">
+          <span data-i18n="marquee">keyword #F92672 — string #E6DB74 — function #A6E22E — type #66D9EF — number #AE81FF — parameter #FD971F — comment #75715E —</span>
+          <span data-i18n="marquee">keyword #F92672 — string #E6DB74 — function #A6E22E — type #66D9EF — number #AE81FF — parameter #FD971F — comment #75715E —</span>
         </div>
       </div>
     </section>
 
-    <section id="preview">
-      <p class="section-label reveal" data-i18n="previewLabel">In the editor</p>
-      <h2 class="section-title reveal" data-i18n="previewTitle">Subtle contrast — not a neon reskin.</h2>
-      <p class="section-copy reveal" data-i18n="previewCopy">A deeper editor than classic Monokai. Tabs, badges, and focus stay in the brown-olive family. Keyword pink is still the original.</p>
-      <div class="preview-wrap reveal">
-        <img src="./preview.png" data-i18n-attr="alt:previewImgAlt" alt="Screenshot of Monokai Modern Contrast in VS Code" width="1366" height="730" />
-      </div>
+    <section class="block" id="specimen">
+      <p class="kicker reveal" data-i18n="previewLabel">01 / Specimen</p>
+      <h2 class="display-title reveal" data-i18n="previewTitle">Code speaks.
+Chrome stays quiet.</h2>
+      <p class="copy reveal" data-i18n="previewCopy">Deeper than classic Monokai. Tabs and focus stay olive. Keyword pink is still the original.</p>
     </section>
 
-    <section>
-      <div class="compare">
-        <div>
-          <p class="section-label reveal" data-i18n="paletteLabel">Palette</p>
-          <h2 class="section-title reveal" data-i18n="paletteTitle">Six colors. The rest is quiet.</h2>
-          <p class="section-copy reveal" data-i18n="paletteCopy">Keywords, strings, types, functions, numbers, parameters. Everything else stays paper.</p>
-        </div>
-        <ul class="token-list reveal">
-          <li><span class="dot" style="background:#F92672"></span><span class="token-name">Keyword</span><span class="token-hex">#F92672</span></li>
-          <li><span class="dot" style="background:#E6DB74"></span><span class="token-name">String</span><span class="token-hex">#E6DB74</span></li>
-          <li><span class="dot" style="background:#A6E22E"></span><span class="token-name">Function</span><span class="token-hex">#A6E22E</span></li>
-          <li><span class="dot" style="background:#66D9EF"></span><span class="token-name">Type</span><span class="token-hex">#66D9EF</span></li>
-          <li><span class="dot" style="background:#AE81FF"></span><span class="token-name">Number</span><span class="token-hex">#AE81FF</span></li>
-          <li><span class="dot" style="background:#FD971F"></span><span class="token-name">Parameter</span><span class="token-hex">#FD971F</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <div class="install" id="install">
-      <div class="install-inner">
-        <p class="section-label reveal" data-i18n="installLabel">Install</p>
-        <h2 class="section-title reveal" data-i18n="installTitle">One command. Done.</h2>
-        <p class="section-copy reveal"><span data-i18n="installCopyBefore">Search </span><em>Monokai Modern Contrast</em><span data-i18n="installCopyAfter"> in Extensions, or run:</span></p>
-        <pre class="code-block reveal"><span class="cmd">ext install</span> <span class="pkg">AdrianTafoya.monokai-modern-contrast</span></pre>
-      </div>
+    <div class="bleed reveal">
+      <img src="./preview.png" data-i18n-attr="alt:previewImgAlt" alt="Screenshot of Monokai Modern Contrast in VS Code" width="1366" height="730" />
     </div>
+
+    <section class="block" id="palette">
+      <p class="kicker reveal" data-i18n="paletteLabel">02 / Tokens</p>
+      <h2 class="display-title reveal" data-i18n="paletteTitle">Six. Nothing else.</h2>
+      <div class="tokens reveal">
+        <div class="token"><span class="token-name" style="color:var(--pink)" data-i18n="tokenKeyword">keyword</span><span class="token-hex">#F92672</span></div>
+        <div class="token"><span class="token-name" style="color:var(--yellow)" data-i18n="tokenString">string</span><span class="token-hex">#E6DB74</span></div>
+        <div class="token"><span class="token-name" style="color:var(--green)" data-i18n="tokenFunction">function</span><span class="token-hex">#A6E22E</span></div>
+        <div class="token"><span class="token-name" style="color:var(--cyan)" data-i18n="tokenType">type</span><span class="token-hex">#66D9EF</span></div>
+        <div class="token"><span class="token-name" style="color:var(--violet)" data-i18n="tokenNumber">number</span><span class="token-hex">#AE81FF</span></div>
+        <div class="token"><span class="token-name" style="color:var(--orange)" data-i18n="tokenParameter">parameter</span><span class="token-hex">#FD971F</span></div>
+      </div>
+    </section>
+
+    <section class="install" id="install">
+      <div class="install-inner">
+        <p class="kicker reveal" data-i18n="installLabel">03 / Install</p>
+        <h2 class="display-title reveal" data-i18n="installTitle">One command.</h2>
+        <button type="button" class="terminal reveal" id="copyCmd" aria-live="polite">
+          <span class="cmd">ext install</span>
+          <span class="pkg">AdrianTafoya.monokai-modern-contrast</span><span class="cursor" aria-hidden="true"></span>
+        </button>
+        <p class="terminal-hint" id="copyHint" data-i18n="installHint">Click to copy</p>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <p><span data-i18n="footerBy">MIT · A theme by </span><a href="https://bektor.tech" target="_blank" rel="noopener">Bektor</a></p>
+  <footer class="foot">
+    <p data-i18n="footerBy">MIT · Bektor</p>
     <p>
       <a href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Marketplace</a>
       ·
       <a href="https://github.com/adriantaf/monokai-modern-contrast" target="_blank" rel="noopener">GitHub</a>
+      ·
+      <a href="./reel.html">Reel</a>
     </p>
   </footer>
 
@@ -536,19 +500,32 @@
       document.getElementById("langToggle")?.addEventListener("click", () => MMC_I18N.toggle());
     });
 
-    const reveals = document.querySelectorAll(".reveal");
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            e.target.classList.add("visible");
+            e.target.classList.add("on");
             io.unobserve(e.target);
           }
         });
       },
-      { threshold: 0.18, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
     );
-    reveals.forEach((el) => io.observe(el));
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    const cmd = "ext install AdrianTafoya.monokai-modern-contrast";
+    const btn = document.getElementById("copyCmd");
+    const hint = document.getElementById("copyHint");
+    btn?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(cmd);
+        const t = MMC_I18N.strings[document.documentElement.dataset.lang || "en"];
+        if (hint) hint.textContent = t.installCopied;
+        setTimeout(() => {
+          if (hint) hint.textContent = t.installHint;
+        }, 1600);
+      } catch (_) {}
+    });
   </script>
 </body>
 </html>
