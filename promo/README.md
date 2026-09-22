@@ -9,7 +9,13 @@ Por ubicación (país hispanohablante → ES), fallback al navegador.
 - `?lang=es` / `?lang=en`
 - Toggle ES/EN en la barra
 
-## Abrir
+## GitHub Pages
+
+Tras activar Pages (Settings → Pages → Source: **GitHub Actions**), la landing queda en:
+
+https://adriantaf.github.io/monokai-modern-contrast/
+
+## Abrir en local
 
 ```bash
 npx --yes serve promo -l 4173
