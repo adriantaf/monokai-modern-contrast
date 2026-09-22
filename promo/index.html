@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monokai Modern Contrast — Classic Monokai. Quieter chrome.</title>
+  <meta name="description" content="Classic Monokai on the code. A quiet olive workbench around it. Tema gratis para VS Code y Cursor." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #121310;
+      --bg: #1a1b17;
+      --bg-editor: #1e1f1c;
+      --paper: #f8f8f2;
+      --muted: #99947c;
+      --comment: #75715e;
+      --pink: #f92672;
+      --yellow: #e6db74;
+      --green: #a6e22e;
+      --cyan: #66d9ef;
+      --orange: #fd971f;
+      --purple: #ae81ff;
+      --olive-line: rgba(117, 113, 94, 0.35);
+      --font-display: "Fraunces", Georgia, serif;
+      --font-body: "Outfit", sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--paper);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Atmosphere */
+    .grain {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Nav */
+    .nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      opacity: 0;
+      animation: rise 0.8s 0.1s ease forwards;
+    }
+
+    .nav-brand img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+
+    .nav-cta {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--bg-deep);
+      background: var(--green);
+      padding: 0.55rem 1rem;
+      border-radius: 4px;
+      opacity: 0;
+      animation: rise 0.8s 0.2s ease forwards;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    /* Hero — one composition */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      isolation: isolate;
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      transform: scale(1.06);
+      animation: kenburns 18s ease-out forwards;
+      filter: saturate(1.05) brightness(0.72);
+    }
+
+    .hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(18, 19, 16, 0.35) 0%, rgba(18, 19, 16, 0.15) 35%, rgba(18, 19, 16, 0.92) 78%, var(--bg-deep) 100%),
+        radial-gradient(ellipse 80% 55% at 70% 40%, transparent 0%, rgba(18, 19, 16, 0.55) 100%);
+    }
+
+    .hero-copy {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1.5rem 4.5rem;
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-weight: 650;
+      font-size: clamp(2.6rem, 7.5vw, 5.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.1rem;
+      opacity: 0;
+      animation: rise 0.9s 0.25s ease forwards;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 0.52em;
+      letter-spacing: -0.01em;
+      margin-top: 0.15em;
+    }
+
+    .headline {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+      max-width: 28ch;
+      color: var(--paper);
+      margin-bottom: 0.65rem;
+      opacity: 0;
+      animation: rise 0.9s 0.4s ease forwards;
+    }
+
+    .lede {
+      font-size: 1.02rem;
+      color: var(--muted);
+      max-width: 38ch;
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: rise 0.9s 0.5s ease forwards;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      opacity: 0;
+      animation: rise 0.9s 0.62s ease forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--pink);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.35rem;
+      border-radius: 4px;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
+
+    .btn-ghost {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--muted);
+      border: 1px solid var(--olive-line);
+      padding: 0.8rem 1.1rem;
+      border-radius: 4px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-ghost:hover {
+      color: var(--paper);
+      border-color: var(--comment);
+    }
+
+    /* Palette strip */
+    .palette {
+      display: flex;
+      gap: 0.45rem;
+      margin-top: 2rem;
+      opacity: 0;
+      animation: rise 0.9s 0.75s ease forwards;
+    }
+
+    .swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      transform-origin: center;
+      animation: pulse 3.2s ease-in-out infinite;
+    }
+
+    .swatch:nth-child(1) { background: var(--pink); animation-delay: 0s; }
+    .swatch:nth-child(2) { background: var(--yellow); animation-delay: 0.15s; }
+    .swatch:nth-child(3) { background: var(--green); animation-delay: 0.3s; }
+    .swatch:nth-child(4) { background: var(--cyan); animation-delay: 0.45s; }
+    .swatch:nth-child(5) { background: var(--orange); animation-delay: 0.6s; }
+    .swatch:nth-child(6) { background: var(--purple); animation-delay: 0.75s; }
+
+    /* Sections */
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5.5rem 1.5rem;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--comment);
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 650;
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      max-width: 16ch;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-copy {
+      color: var(--muted);
+      max-width: 48ch;
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .preview-wrap {
+      position: relative;
+      border: 1px solid var(--olive-line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--bg);
+      box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.65);
+    }
+
+    .preview-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .compare {
+      display: grid;
+      gap: 2rem;
+    }
+
+    @media (min-width: 800px) {
+      .compare {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+      }
+    }
+
+    .compare-item h3 {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--comment);
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .token-list {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+    }
+
+    .token-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--olive-line);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    .token-name { color: var(--paper); }
+    .token-hex { color: var(--comment); margin-left: auto; }
+
+    .install {
+      background:
+        radial-gradient(ellipse 60% 80% at 10% 50%, rgba(249, 38, 114, 0.08), transparent 55%),
+        radial-gradient(ellipse 50% 70% at 90% 40%, rgba(166, 226, 46, 0.06), transparent 50%),
+        var(--bg);
+      border-block: 1px solid var(--olive-line);
+    }
+
+    .install-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5.5rem 1.5rem;
+    }
+
+    .code-block {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      background: var(--bg-deep);
+      border: 1px solid var(--olive-line);
+      border-radius: 6px;
+      padding: 1.15rem 1.25rem;
+      color: var(--yellow);
+      overflow-x: auto;
+      max-width: 42rem;
+    }
+
+    .code-block .cmd { color: var(--green); }
+    .code-block .pkg { color: var(--cyan); }
+
+    .footer {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--comment);
+      font-size: 0.85rem;
+    }
+
+    .footer a:hover { color: var(--paper); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes kenburns {
+      from { transform: scale(1.06) translate(0, 0); }
+      to { transform: scale(1.12) translate(-1.5%, -1%); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="nav-brand" href="#top">
+      <img src="./icon.png" alt="" width="28" height="28" />
+      Monokai Modern Contrast
+    </a>
+    <a class="nav-cta" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Instalar</a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Inicio">
+      <div class="hero-media">
+        <img src="./hero.png" alt="Editor con Monokai Modern Contrast" width="1376" height="768" />
+      </div>
+      <div class="hero-copy">
+        <h1 class="brand">
+          Monokai
+          <span>Modern Contrast</span>
+        </h1>
+        <p class="headline">Classic Monokai on the code. A quiet olive workbench around it.</p>
+        <p class="lede">Los seis colores donde pertenecen. El resto, papel. Chrome oliva, no neón.</p>
+        <div class="cta-row">
+          <a class="btn-primary" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">
+            Instalar en VS Code / Cursor
+          </a>
+          <a class="btn-ghost" href="#preview">Ver el tema</a>
+        </div>
+        <div class="palette" aria-hidden="true">
+          <span class="swatch"></span>
+          <span class="swatch"></span>
+          <span class="swatch"></span>
+          <span class="swatch"></span>
+          <span class="swatch"></span>
+          <span class="swatch"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="preview">
+      <p class="section-label reveal">En el editor</p>
+      <h2 class="section-title reveal">Contraste sutil, no un reskin neón.</h2>
+      <p class="section-copy reveal">Editor más profundo que el Monokai clásico. Tabs, badges y foco en la familia oliva-marrón. El rosa de keywords sigue siendo el original.</p>
+      <div class="preview-wrap reveal">
+        <img src="./preview.png" alt="Captura de Monokai Modern Contrast en VS Code" width="1366" height="730" />
+      </div>
+    </section>
+
+    <section>
+      <div class="compare">
+        <div>
+          <p class="section-label reveal">Paleta</p>
+          <h2 class="section-title reveal">Seis colores. El resto, silencio.</h2>
+          <p class="section-copy reveal">Keywords, strings, types, functions, numbers, parameters. Todo lo demás se queda en papel.</p>
+        </div>
+        <ul class="token-list reveal">
+          <li><span class="dot" style="background:#F92672"></span><span class="token-name">Keyword</span><span class="token-hex">#F92672</span></li>
+          <li><span class="dot" style="background:#E6DB74"></span><span class="token-name">String</span><span class="token-hex">#E6DB74</span></li>
+          <li><span class="dot" style="background:#A6E22E"></span><span class="token-name">Function</span><span class="token-hex">#A6E22E</span></li>
+          <li><span class="dot" style="background:#66D9EF"></span><span class="token-name">Type</span><span class="token-hex">#66D9EF</span></li>
+          <li><span class="dot" style="background:#AE81FF"></span><span class="token-name">Number</span><span class="token-hex">#AE81FF</span></li>
+          <li><span class="dot" style="background:#FD971F"></span><span class="token-name">Parameter</span><span class="token-hex">#FD971F</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="install" id="install">
+      <div class="install-inner">
+        <p class="section-label reveal">Instalar</p>
+        <h2 class="section-title reveal">Un comando. Listo.</h2>
+        <p class="section-copy reveal">Busca <em>Monokai Modern Contrast</em> en Extensions, o ejecuta:</p>
+        <pre class="code-block reveal"><span class="cmd">ext install</span> <span class="pkg">AdrianTafoya.monokai-modern-contrast</span></pre>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>MIT · Un tema de <a href="https://bektor.tech" target="_blank" rel="noopener">Bektor</a></p>
+    <p>
+      <a href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Marketplace</a>
+      ·
+      <a href="https://github.com/adriantaf/monokai-modern-contrast" target="_blank" rel="noopener">GitHub</a>
+    </p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.18, rootMargin: "0px 0px -40px 0px" }
+    );
+    reveals.forEach((el) => io.observe(el));
+  </script>
+</body>
+</html>
