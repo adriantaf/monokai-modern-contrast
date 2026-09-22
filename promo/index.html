@@ -85,6 +85,32 @@
       border-radius: 6px;
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      opacity: 0;
+      animation: rise 0.8s 0.2s ease forwards;
+    }
+
+    .lang-toggle {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--olive-line);
+      padding: 0.45rem 0.65rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .lang-toggle:hover {
+      color: var(--paper);
+      border-color: var(--comment);
+    }
+
     .nav-cta {
       font-size: 0.85rem;
       font-weight: 500;
@@ -92,8 +118,6 @@
       background: var(--green);
       padding: 0.55rem 1rem;
       border-radius: 4px;
-      opacity: 0;
-      animation: rise 0.8s 0.2s ease forwards;
       transition: transform 0.2s ease, filter 0.2s ease;
     }
 
@@ -425,26 +449,29 @@
       <img src="./icon.png" alt="" width="28" height="28" />
       Monokai Modern Contrast
     </a>
-    <a class="nav-cta" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Instalar</a>
+    <div class="nav-actions">
+      <button type="button" class="lang-toggle" id="langToggle" data-i18n="langSwitch" data-i18n-attr="aria-label:langSwitchAria" aria-label="Switch language">EN</button>
+      <a class="nav-cta" data-i18n="navInstall" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Install</a>
+    </div>
   </header>
 
   <main id="top">
-    <section class="hero" aria-label="Inicio">
+    <section class="hero" data-i18n-attr="aria-label:heroAria" aria-label="Home">
       <div class="hero-media">
-        <img src="./hero.png" alt="Editor con Monokai Modern Contrast" width="1376" height="768" />
+        <img src="./hero.png" data-i18n-attr="alt:heroImgAlt" alt="Editor with Monokai Modern Contrast" width="1376" height="768" />
       </div>
       <div class="hero-copy">
         <h1 class="brand">
           Monokai
           <span>Modern Contrast</span>
         </h1>
-        <p class="headline">Classic Monokai on the code. A quiet olive workbench around it.</p>
-        <p class="lede">Los seis colores donde pertenecen. El resto, papel. Chrome oliva, no neón.</p>
+        <p class="headline" data-i18n="headline">Classic Monokai on the code. A quiet olive workbench around it.</p>
+        <p class="lede" data-i18n="lede">The six colors stay where they belong. Everything else stays paper. Olive chrome, not neon.</p>
         <div class="cta-row">
-          <a class="btn-primary" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">
-            Instalar en VS Code / Cursor
+          <a class="btn-primary" data-i18n="ctaPrimary" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">
+            Install for VS Code / Cursor
           </a>
-          <a class="btn-ghost" href="#preview">Ver el tema</a>
+          <a class="btn-ghost" data-i18n="ctaGhost" href="#preview">See the theme</a>
         </div>
         <div class="palette" aria-hidden="true">
           <span class="swatch"></span>
@@ -458,20 +485,20 @@
     </section>
 
     <section id="preview">
-      <p class="section-label reveal">En el editor</p>
-      <h2 class="section-title reveal">Contraste sutil, no un reskin neón.</h2>
-      <p class="section-copy reveal">Editor más profundo que el Monokai clásico. Tabs, badges y foco en la familia oliva-marrón. El rosa de keywords sigue siendo el original.</p>
+      <p class="section-label reveal" data-i18n="previewLabel">In the editor</p>
+      <h2 class="section-title reveal" data-i18n="previewTitle">Subtle contrast — not a neon reskin.</h2>
+      <p class="section-copy reveal" data-i18n="previewCopy">A deeper editor than classic Monokai. Tabs, badges, and focus stay in the brown-olive family. Keyword pink is still the original.</p>
       <div class="preview-wrap reveal">
-        <img src="./preview.png" alt="Captura de Monokai Modern Contrast en VS Code" width="1366" height="730" />
+        <img src="./preview.png" data-i18n-attr="alt:previewImgAlt" alt="Screenshot of Monokai Modern Contrast in VS Code" width="1366" height="730" />
       </div>
     </section>
 
     <section>
       <div class="compare">
         <div>
-          <p class="section-label reveal">Paleta</p>
-          <h2 class="section-title reveal">Seis colores. El resto, silencio.</h2>
-          <p class="section-copy reveal">Keywords, strings, types, functions, numbers, parameters. Todo lo demás se queda en papel.</p>
+          <p class="section-label reveal" data-i18n="paletteLabel">Palette</p>
+          <h2 class="section-title reveal" data-i18n="paletteTitle">Six colors. The rest is quiet.</h2>
+          <p class="section-copy reveal" data-i18n="paletteCopy">Keywords, strings, types, functions, numbers, parameters. Everything else stays paper.</p>
         </div>
         <ul class="token-list reveal">
           <li><span class="dot" style="background:#F92672"></span><span class="token-name">Keyword</span><span class="token-hex">#F92672</span></li>
@@ -486,16 +513,16 @@
 
     <div class="install" id="install">
       <div class="install-inner">
-        <p class="section-label reveal">Instalar</p>
-        <h2 class="section-title reveal">Un comando. Listo.</h2>
-        <p class="section-copy reveal">Busca <em>Monokai Modern Contrast</em> en Extensions, o ejecuta:</p>
+        <p class="section-label reveal" data-i18n="installLabel">Install</p>
+        <h2 class="section-title reveal" data-i18n="installTitle">One command. Done.</h2>
+        <p class="section-copy reveal"><span data-i18n="installCopyBefore">Search </span><em>Monokai Modern Contrast</em><span data-i18n="installCopyAfter"> in Extensions, or run:</span></p>
         <pre class="code-block reveal"><span class="cmd">ext install</span> <span class="pkg">AdrianTafoya.monokai-modern-contrast</span></pre>
       </div>
     </div>
   </main>
 
   <footer class="footer">
-    <p>MIT · Un tema de <a href="https://bektor.tech" target="_blank" rel="noopener">Bektor</a></p>
+    <p><span data-i18n="footerBy">MIT · A theme by </span><a href="https://bektor.tech" target="_blank" rel="noopener">Bektor</a></p>
     <p>
       <a href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Marketplace</a>
       ·
@@ -503,7 +530,12 @@
     </p>
   </footer>
 
+  <script src="./i18n.js"></script>
   <script>
+    MMC_I18N.init().then(() => {
+      document.getElementById("langToggle")?.addEventListener("click", () => MMC_I18N.toggle());
+    });
+
     const reveals = document.querySelectorAll(".reveal");
     const io = new IntersectionObserver(
       (entries) => {

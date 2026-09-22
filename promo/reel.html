@@ -245,7 +245,7 @@
       <div>
         <img class="logo" src="./icon.png" alt="" width="72" height="72" />
         <h1>Monokai<span>Modern Contrast</span></h1>
-        <p class="tag">Classic Monokai. Quieter chrome.</p>
+        <p class="tag" data-i18n="reelTag">Classic Monokai. Quieter chrome.</p>
         <div class="swatches" aria-hidden="true">
           <i style="background:#F92672"></i>
           <i style="background:#E6DB74"></i>
@@ -262,30 +262,33 @@
       <div class="bg"></div>
       <div class="veil"></div>
       <div class="copy">
-        <h2>El rosa donde importa.<br/>El chrome, en silencio.</h2>
-        <p>Keywords clásicos. Workbench oliva. Sin neón de más.</p>
+        <h2 data-i18n="reelHeroTitle" data-i18n-html>Pink where it matters.<br/>Chrome stays quiet.</h2>
+        <p data-i18n="reelHeroCopy">Classic keywords. Olive workbench. No extra neon.</p>
       </div>
     </div>
 
     <!-- 2: Real preview -->
     <div class="slide slide-preview" data-duration="4000">
-      <p class="caption">En VS Code / Cursor</p>
+      <p class="caption" data-i18n="reelCaption">In VS Code / Cursor</p>
       <div class="frame">
-        <img src="./preview.png" alt="Preview del tema" width="1366" height="730" />
+        <img src="./preview.png" data-i18n-attr="alt:reelPreviewAlt" alt="Theme preview" width="1366" height="730" />
       </div>
     </div>
 
     <!-- 3: CTA -->
     <div class="slide slide-cta" data-duration="4200">
       <div>
-        <h2>Instálalo hoy.</h2>
-        <p>Gratis en el Marketplace · MIT · Bektor</p>
+        <h2 data-i18n="reelCtaTitle">Install it today.</h2>
+        <p data-i18n="reelCtaCopy">Free on the Marketplace · MIT · Bektor</p>
         <div class="pill"><span class="g">ext install</span> AdrianTafoya.monokai-modern-contrast</div>
       </div>
     </div>
   </div>
 
+  <script src="./i18n.js"></script>
   <script>
+    MMC_I18N.init();
+
     const slides = [...document.querySelectorAll(".slide")];
     let i = 0;
     let looping = true;
@@ -302,10 +305,8 @@
       setTimeout(next, ms);
     }
 
-    // Start after first slide duration
     setTimeout(next, Number(slides[0].dataset.duration) || 3200);
 
-    // Fit stage to viewport for recording
     function fit() {
       const stage = document.getElementById("stage");
       const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
