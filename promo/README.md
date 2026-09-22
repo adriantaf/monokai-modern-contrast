@@ -17,7 +17,8 @@ npx --yes serve promo -l 4173
 | --- | --- |
 | `index.html` | Landing promocional |
 | `reel.html` | Secuencia automática para video |
+| `reel.mp4` | Clip ~14s listo para redes |
 | `hero.png` | Hero full-bleed |
 | `preview.png` | Captura real del tema |
 | `social.png` | Cuadrado para redes |
-| `icon.png` | Icono del extension |
+| `icon.png` | Icono de la extensión |
