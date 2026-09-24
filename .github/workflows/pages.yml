@@ -1,13 +1,9 @@
-name: Deploy promo to GitHub Pages
+name: Deploy site to GitHub Pages
 
 on:
   push:
     branches:
       - main
-      - cursor/promo-saas-landing-ced9
-    paths:
-      - "promo/**"
-      - ".github/workflows/pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -29,6 +25,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Stage site files
+        run: |
+          mkdir -p _site/res
+          cp index.html reel.html i18n.js .nojekyll _site/
+          cp res/hero.png res/icon.png res/screenshot.png res/social.png _site/res/
+          cp reel.mp4 reel-es.mp4 reel-en.mp4 _site/ 2>/dev/null || true
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
@@ -37,7 +40,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: promo
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
