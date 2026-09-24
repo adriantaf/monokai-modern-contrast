@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monokai Modern Contrast — Reel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0c0d0b;
+      --paper: #f8f8f2;
+      --mute: #8a8570;
+      --pink: #f92672;
+      --yellow: #e6db74;
+      --green: #a6e22e;
+      --cyan: #66d9ef;
+      --orange: #fd971f;
+      --violet: #ae81ff;
+      --display: "Syne", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: #000; overflow: hidden; }
+    body { font-family: var(--mono); color: var(--paper); }
+    .stage {
+      width: 1280px;
+      height: 720px;
+      margin: 0 auto;
+      position: relative;
+      background: var(--ink);
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .slide.active { opacity: 1; }
+
+    .slide-brand {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 45%, rgba(249,38,114,0.12), transparent 60%),
+        var(--ink);
+    }
+    .mega {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 9.5rem;
+      line-height: 0.82;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+    }
+    .mega span:nth-child(1) { color: var(--pink); }
+    .mega span:nth-child(2) { color: var(--yellow); }
+    .mega span:nth-child(3) { color: var(--green); }
+    .mega span:nth-child(4) { color: var(--cyan); }
+    .mega span:nth-child(5) { color: var(--orange); }
+    .mega span:nth-child(6) { color: var(--violet); }
+    .mega span:nth-child(7) { color: var(--paper); }
+    .sub {
+      margin-top: 0.6rem;
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: 1.35rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--mute);
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .tag {
+      margin-top: 1.4rem;
+      font-size: 0.95rem;
+      color: var(--mute);
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .slide-brand.active .sub,
+    .slide-brand.active .tag { animation: up 0.7s 0.25s ease forwards; }
+    .slide-brand.active .tag { animation-delay: 0.4s; }
+
+    .slide-hero { background: #0c0d0b; }
+    .slide-hero .bg {
+      position: absolute;
+      inset: 0;
+      background: url("./res/hero.png") center/cover no-repeat;
+      filter: brightness(0.45) saturate(1.1);
+      transform: scale(1.05);
+    }
+    .slide-hero.active .bg { animation: zoom 4.5s ease-out forwards; }
+    .slide-hero .veil {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(12,13,11,0.92) 0%, rgba(12,13,11,0.45) 55%, transparent 100%);
+    }
+    .slide-hero .copy {
+      position: absolute;
+      left: 72px;
+      bottom: 88px;
+      max-width: 560px;
+    }
+    .slide-hero h2 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 3.4rem;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      line-height: 0.95;
+      margin-bottom: 0.85rem;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    .slide-hero p {
+      color: var(--mute);
+      font-size: 1rem;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    .slide-hero.active h2 { animation: up 0.7s 0.2s ease forwards; }
+    .slide-hero.active p { animation: up 0.7s 0.35s ease forwards; }
+
+    .slide-preview {
+      display: grid;
+      place-items: center;
+      padding: 48px 56px;
+      background: var(--ink);
+    }
+    .caption {
+      position: absolute;
+      top: 36px;
+      left: 56px;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mute);
+      opacity: 0;
+    }
+    .frame {
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(248,248,242,0.12);
+      opacity: 0;
+      transform: translateY(18px) scale(0.985);
+    }
+    .frame img { width: 100%; height: auto; display: block; }
+    .slide-preview.active .caption { animation: up 0.55s 0.1s ease forwards; }
+    .slide-preview.active .frame { animation: upScale 0.8s 0.15s ease forwards; }
+
+    .slide-cta {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background:
+        radial-gradient(ellipse 55% 45% at 50% 45%, rgba(249,38,114,0.14), transparent 60%),
+        var(--ink);
+    }
+    .slide-cta h2 {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 4.2rem;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    .slide-cta p {
+      color: var(--mute);
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    .pill {
+      display: inline-block;
+      font-size: 1rem;
+      border: 1px solid rgba(248,248,242,0.14);
+      background: #1a1b17;
+      padding: 1rem 1.35rem;
+      color: var(--cyan);
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    .pill .g { color: var(--green); }
+    .slide-cta.active h2 { animation: up 0.7s 0.15s ease forwards; }
+    .slide-cta.active p { animation: up 0.7s 0.3s ease forwards; }
+    .slide-cta.active .pill { animation: up 0.7s 0.45s ease forwards; }
+
+    @keyframes up { to { opacity: 1; transform: none; } }
+    @keyframes upScale { to { opacity: 1; transform: none; } }
+    @keyframes zoom { to { transform: scale(1.12); } }
+  </style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="slide slide-brand active" data-duration="3200">
+      <div>
+        <div class="mega" aria-hidden="true">
+          <span>M</span><span>O</span><span>N</span><span>O</span><span>K</span><span>A</span><span>I</span>
+        </div>
+        <p class="sub">Modern Contrast</p>
+        <p class="tag" data-i18n="reelTag">Classic Monokai. Quieter chrome.</p>
+      </div>
+    </div>
+
+    <div class="slide slide-hero" data-duration="3800">
+      <div class="bg"></div>
+      <div class="veil"></div>
+      <div class="copy">
+        <h2 data-i18n="reelHeroTitle" data-i18n-html>Pink where it matters.<br/>Chrome stays quiet.</h2>
+        <p data-i18n="reelHeroCopy">Classic keywords. Olive workbench. No extra neon.</p>
+      </div>
+    </div>
+
+    <div class="slide slide-preview" data-duration="4000">
+      <p class="caption" data-i18n="reelCaption">In VS Code / Cursor</p>
+      <div class="frame">
+        <img src="./res/screenshot.png" data-i18n-attr="alt:reelPreviewAlt" alt="Theme preview" width="1366" height="730" />
+      </div>
+    </div>
+
+    <div class="slide slide-cta" data-duration="4200">
+      <div>
+        <h2 data-i18n="reelCtaTitle">Install it today.</h2>
+        <p data-i18n="reelCtaCopy">Free on the Marketplace · MIT · Bektor</p>
+        <div class="pill"><span class="g">ext install</span> AdrianTafoya.monokai-modern-contrast</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./i18n.js"></script>
+  <script>
+    MMC_I18N.init();
+    const slides = [...document.querySelectorAll(".slide")];
+    let i = 0;
+    function show(n) {
+      slides.forEach((s, idx) => s.classList.toggle("active", idx === n));
+    }
+    function next() {
+      i = (i + 1) % slides.length;
+      show(i);
+      setTimeout(next, Number(slides[i].dataset.duration) || 3500);
+    }
+    setTimeout(next, Number(slides[0].dataset.duration) || 3200);
+    function fit() {
+      const stage = document.getElementById("stage");
+      const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+      stage.style.transformOrigin = "top center";
+      stage.style.transform = `scale(${scale})`;
+      document.body.style.height = `${720 * scale}px`;
+    }
+    fit();
+    window.addEventListener("resize", fit);
+  </script>
+</body>
+</html>

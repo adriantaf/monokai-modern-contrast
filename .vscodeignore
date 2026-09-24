@@ -1,4 +1,12 @@
 .vscode/**
 .git/**
+.github/**
 notes.txt
 **/*.map
+index.html
+reel.html
+i18n.js
+.nojekyll
+*.mp4
+res/hero.png
+res/social.png

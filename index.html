@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monokai Modern Contrast</title>
+  <meta name="description" content="Classic Monokai on the code. Quiet olive chrome. Free theme for VS Code and Cursor." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0c0d0b;
+      --olive: #1a1b17;
+      --editor: #1e1f1c;
+      --paper: #f8f8f2;
+      --mute: #8a8570;
+      --line: rgba(248, 248, 242, 0.12);
+      --pink: #f92672;
+      --yellow: #e6db74;
+      --green: #a6e22e;
+      --cyan: #66d9ef;
+      --orange: #fd971f;
+      --violet: #ae81ff;
+      --comment: #75715e;
+      --display: "Syne", system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--mono);
+      background: var(--ink);
+      color: var(--paper);
+      line-height: 1.45;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Top index bar (Awwwards portfolio pattern) ── */
+    .bar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      border-bottom: 1px solid var(--line);
+      background: rgba(12, 13, 11, 0.72);
+      backdrop-filter: blur(10px);
+    }
+    .bar-brand {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.02em;
+    }
+    .bar-nav {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mute);
+    }
+    .bar-nav a:hover,
+    .lang-toggle:hover { color: var(--paper); }
+    .lang-toggle {
+      letter-spacing: 0.12em;
+      color: var(--mute);
+      padding: 0.2rem 0;
+      border-bottom: 1px solid transparent;
+    }
+    .lang-toggle:hover { border-bottom-color: var(--paper); }
+
+    /* ── Hero: one composition, brand as the visual ── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      isolation: isolate;
+      padding-top: 3.25rem;
+    }
+    .hero-plane {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .hero-plane img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 60% 35%;
+      transform: scale(1.04);
+      animation: drift 22s ease-in-out infinite alternate;
+      filter: saturate(1.1) contrast(1.05) brightness(0.42);
+    }
+    .hero-plane::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(12,13,11,0.55) 0%, transparent 28%, rgba(12,13,11,0.35) 55%, var(--ink) 100%),
+        radial-gradient(ellipse 90% 70% at 50% 20%, transparent 20%, rgba(12,13,11,0.65) 100%);
+    }
+
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem 1.25rem 1.5rem;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .mega {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(3.4rem, 14vw, 11.5rem);
+      line-height: 0.82;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .mega span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(0.35em);
+      animation: letterIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .mega span:nth-child(1) { color: var(--pink); animation-delay: 0.05s; }
+    .mega span:nth-child(2) { color: var(--yellow); animation-delay: 0.1s; }
+    .mega span:nth-child(3) { color: var(--green); animation-delay: 0.15s; }
+    .mega span:nth-child(4) { color: var(--cyan); animation-delay: 0.2s; }
+    .mega span:nth-child(5) { color: var(--orange); animation-delay: 0.25s; }
+    .mega span:nth-child(6) { color: var(--violet); animation-delay: 0.3s; }
+    .mega span:nth-child(7) { color: var(--paper); animation-delay: 0.35s; }
+
+    .subbrand {
+      margin-top: 0.55rem;
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(1.1rem, 3.2vw, 2rem);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--mute);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.55s ease forwards;
+    }
+
+    .hero-meta {
+      display: grid;
+      gap: 1.25rem;
+      margin-top: 2rem;
+      max-width: 34rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s ease forwards;
+    }
+    @media (min-width: 720px) {
+      .hero-meta {
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        max-width: none;
+      }
+    }
+    .lede {
+      font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+      color: var(--paper);
+      max-width: 28ch;
+      font-family: var(--mono);
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      align-items: center;
+    }
+    .cta-main {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      background: var(--pink);
+      padding: 0.75rem 1.15rem;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .cta-main:hover {
+      background: var(--green);
+      transform: translateY(-2px);
+    }
+    .cta-ghost {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mute);
+      border-bottom: 1px solid var(--mute);
+      padding-bottom: 0.15rem;
+    }
+    .cta-ghost:hover { color: var(--paper); border-color: var(--paper); }
+
+    .marquee-wrap {
+      border-block: 1px solid var(--line);
+      overflow: hidden;
+      background: rgba(12, 13, 11, 0.85);
+    }
+    .marquee {
+      display: flex;
+      width: max-content;
+      gap: 0;
+      animation: marquee 28s linear infinite;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mute);
+      padding: 0.7rem 0;
+      white-space: nowrap;
+    }
+    .marquee span { padding-right: 2.5rem; }
+
+    /* ── Sections ── */
+    .block {
+      padding: 5rem 1.25rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--comment);
+      margin-bottom: 1rem;
+    }
+    .display-title {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 7vw, 5.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.045em;
+      text-transform: uppercase;
+      white-space: pre-line;
+      max-width: 12ch;
+      margin-bottom: 1rem;
+    }
+    .copy {
+      color: var(--mute);
+      max-width: 42ch;
+      font-size: 0.92rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .bleed {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
+      border-block: 1px solid var(--line);
+      overflow: hidden;
+      background: var(--olive);
+    }
+    .bleed img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transform: scale(1.01);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .bleed:hover img { transform: scale(1.03); }
+
+    /* Token specimen — horizontal type samples, not cards */
+    .tokens {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .token {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 1rem;
+      align-items: baseline;
+      padding: 1.35rem 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding-left 0.35s ease;
+    }
+    .token:hover { padding-left: 0.75rem; }
+    .token-name {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(1.8rem, 5vw, 3.6rem);
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+      line-height: 1;
+    }
+    .token-hex {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--mute);
+    }
+
+    /* Install terminal — interactive */
+    .install {
+      min-height: 70svh;
+      display: grid;
+      align-content: center;
+      padding: 5rem 1.25rem;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 40%, rgba(249, 38, 114, 0.1), transparent 60%),
+        var(--ink);
+      border-top: 1px solid var(--line);
+    }
+    .install-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .terminal {
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 48rem;
+      text-align: left;
+      border: 1px solid var(--line);
+      background: var(--olive);
+      padding: 1.25rem 1.35rem;
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .terminal:hover { border-color: var(--pink); }
+    .terminal .cmd { color: var(--green); }
+    .terminal .pkg { color: var(--cyan); }
+    .terminal .cursor {
+      display: inline-block;
+      width: 0.55em;
+      height: 1.05em;
+      background: var(--pink);
+      margin-left: 0.15em;
+      vertical-align: text-bottom;
+      animation: blink 1.05s steps(1) infinite;
+    }
+    .terminal-hint {
+      margin-top: 0.75rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mute);
+    }
+
+    .foot {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.5rem 1.25rem 2rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mute);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .foot a:hover { color: var(--paper); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.on {
+      opacity: 1;
+      transform: none;
+    }
+
+    @keyframes letterIn {
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes drift {
+      from { transform: scale(1.04) translate(0, 0); }
+      to { transform: scale(1.1) translate(-1.5%, -1.2%); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+
+    @media (max-width: 640px) {
+      .bar-nav a:not(.lang-toggle) { display: none; }
+      .mega { font-size: clamp(3.2rem, 18vw, 5rem); }
+      .subbrand { letter-spacing: 0.16em; }
+    }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <a class="bar-brand" href="#top">Monokai</a>
+    <nav class="bar-nav" aria-label="Primary">
+      <a href="#top" data-i18n="navIndex">Index</a>
+      <a href="#palette" data-i18n="navPalette">Palette</a>
+      <a href="#install" data-i18n="navInstall">Install</a>
+      <button type="button" class="lang-toggle" id="langToggle" data-i18n="langSwitch" data-i18n-attr="aria-label:langSwitchAria">ES</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" data-i18n-attr="aria-label:heroAria" aria-label="Home">
+      <div class="hero-plane">
+        <img src="./res/hero.png" data-i18n-attr="alt:heroImgAlt" alt="Editor with Monokai Modern Contrast" width="1376" height="768" />
+      </div>
+
+      <div class="hero-main">
+        <h1 class="mega" aria-label="Monokai">
+          <span>M</span><span>O</span><span>N</span><span>O</span><span>K</span><span>A</span><span>I</span>
+        </h1>
+        <p class="subbrand" data-i18n="brandLine">Modern Contrast</p>
+
+        <div class="hero-meta">
+          <p class="lede" data-i18n="lede">The six colors stay where they belong. Everything else stays paper.</p>
+          <div class="cta-row">
+            <a class="cta-main" data-i18n="ctaPrimary" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Install theme</a>
+            <a class="cta-ghost" data-i18n="ctaGhost" href="#specimen">View specimen</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee-wrap" aria-hidden="true">
+        <div class="marquee">
+          <span data-i18n="marquee">keyword #F92672 — string #E6DB74 — function #A6E22E — type #66D9EF — number #AE81FF — parameter #FD971F — comment #75715E —</span>
+          <span data-i18n="marquee">keyword #F92672 — string #E6DB74 — function #A6E22E — type #66D9EF — number #AE81FF — parameter #FD971F — comment #75715E —</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="specimen">
+      <p class="kicker reveal" data-i18n="previewLabel">01 / Specimen</p>
+      <h2 class="display-title reveal" data-i18n="previewTitle">Code speaks.
+Chrome stays quiet.</h2>
+      <p class="copy reveal" data-i18n="previewCopy">Deeper than classic Monokai. Tabs and focus stay olive. Keyword pink is still the original.</p>
+    </section>
+
+    <div class="bleed reveal">
+      <img src="./res/screenshot.png" data-i18n-attr="alt:previewImgAlt" alt="Screenshot of Monokai Modern Contrast in VS Code" width="1366" height="730" />
+    </div>
+
+    <section class="block" id="palette">
+      <p class="kicker reveal" data-i18n="paletteLabel">02 / Tokens</p>
+      <h2 class="display-title reveal" data-i18n="paletteTitle">Six. Nothing else.</h2>
+      <div class="tokens reveal">
+        <div class="token"><span class="token-name" style="color:var(--pink)" data-i18n="tokenKeyword">keyword</span><span class="token-hex">#F92672</span></div>
+        <div class="token"><span class="token-name" style="color:var(--yellow)" data-i18n="tokenString">string</span><span class="token-hex">#E6DB74</span></div>
+        <div class="token"><span class="token-name" style="color:var(--green)" data-i18n="tokenFunction">function</span><span class="token-hex">#A6E22E</span></div>
+        <div class="token"><span class="token-name" style="color:var(--cyan)" data-i18n="tokenType">type</span><span class="token-hex">#66D9EF</span></div>
+        <div class="token"><span class="token-name" style="color:var(--violet)" data-i18n="tokenNumber">number</span><span class="token-hex">#AE81FF</span></div>
+        <div class="token"><span class="token-name" style="color:var(--orange)" data-i18n="tokenParameter">parameter</span><span class="token-hex">#FD971F</span></div>
+      </div>
+    </section>
+
+    <section class="install" id="install">
+      <div class="install-inner">
+        <p class="kicker reveal" data-i18n="installLabel">03 / Install</p>
+        <h2 class="display-title reveal" data-i18n="installTitle">One command.</h2>
+        <button type="button" class="terminal reveal" id="copyCmd" aria-live="polite">
+          <span class="cmd">ext install</span>
+          <span class="pkg">AdrianTafoya.monokai-modern-contrast</span><span class="cursor" aria-hidden="true"></span>
+        </button>
+        <p class="terminal-hint" id="copyHint" data-i18n="installHint">Click to copy</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p data-i18n="footerBy">MIT · Bektor</p>
+    <p>
+      <a href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Marketplace</a>
+      ·
+      <a href="https://github.com/adriantaf/monokai-modern-contrast" target="_blank" rel="noopener">GitHub</a>
+      ·
+      <a href="./reel.html">Reel</a>
+    </p>
+  </footer>
+
+  <script src="./i18n.js"></script>
+  <script>
+    MMC_I18N.init().then(() => {
+      document.getElementById("langToggle")?.addEventListener("click", () => MMC_I18N.toggle());
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("on");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    const cmd = "ext install AdrianTafoya.monokai-modern-contrast";
+    const btn = document.getElementById("copyCmd");
+    const hint = document.getElementById("copyHint");
+    btn?.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(cmd);
+        const t = MMC_I18N.strings[document.documentElement.dataset.lang || "en"];
+        if (hint) hint.textContent = t.installCopied;
+        setTimeout(() => {
+          if (hint) hint.textContent = t.installHint;
+        }, 1600);
+      } catch (_) {}
+    });
+  </script>
+</body>
+</html>
