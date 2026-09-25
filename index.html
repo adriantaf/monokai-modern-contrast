@@ -4,25 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Monokai Modern Contrast</title>
-  <meta name="description" content="Classic Monokai on the code. Quiet olive chrome. Free theme for VS Code and Cursor." />
+  <meta name="description" content="Near-black workbench with clear borders. Soft Monokai syntax — elegant, not neon. Free theme for VS Code and Cursor." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ink: #0c0d0b;
-      --olive: #1a1b17;
-      --editor: #1e1f1c;
-      --paper: #f8f8f2;
-      --mute: #8a8570;
-      --line: rgba(248, 248, 242, 0.12);
-      --pink: #f92672;
-      --yellow: #e6db74;
-      --green: #a6e22e;
-      --cyan: #66d9ef;
-      --orange: #fd971f;
-      --violet: #ae81ff;
-      --comment: #75715e;
+      --ink: #080808;
+      --olive: #0e0e0e;
+      --editor: #121212;
+      --paper: #e8e6e3;
+      --mute: #9a9690;
+      --line: #2c2c2c;
+      --pink: #c45b78;
+      --yellow: #b8ae6a;
+      --green: #8bae5b;
+      --cyan: #6a9eaa;
+      --orange: #c4895a;
+      --violet: #9580b8;
+      --comment: #6e6b66;
+      --focus: #8a8680;
       --display: "Syne", system-ui, sans-serif;
       --mono: "IBM Plex Mono", ui-monospace, monospace;
     }
@@ -51,8 +52,7 @@
       gap: 1rem;
       padding: 0.85rem 1.25rem;
       border-bottom: 1px solid var(--line);
-      background: rgba(12, 13, 11, 0.72);
-      backdrop-filter: blur(10px);
+      background: var(--ink);
     }
     .bar-brand {
       font-family: var(--display);
@@ -99,17 +99,13 @@
       height: 100%;
       object-fit: cover;
       object-position: 60% 35%;
-      transform: scale(1.04);
-      animation: drift 22s ease-in-out infinite alternate;
-      filter: saturate(1.1) contrast(1.05) brightness(0.42);
+      filter: saturate(0.85) contrast(1.02) brightness(0.38);
     }
     .hero-plane::after {
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(180deg, rgba(12,13,11,0.55) 0%, transparent 28%, rgba(12,13,11,0.35) 55%, var(--ink) 100%),
-        radial-gradient(ellipse 90% 70% at 50% 20%, transparent 20%, rgba(12,13,11,0.65) 100%);
+      background: linear-gradient(180deg, rgba(8,8,8,0.55) 0%, transparent 35%, var(--ink) 100%);
     }
 
     .hero-main {
@@ -129,23 +125,8 @@
       line-height: 0.82;
       letter-spacing: -0.06em;
       text-transform: uppercase;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
+      color: var(--paper);
     }
-    .mega span {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(0.35em);
-      animation: letterIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    .mega span:nth-child(1) { color: var(--pink); animation-delay: 0.05s; }
-    .mega span:nth-child(2) { color: var(--yellow); animation-delay: 0.1s; }
-    .mega span:nth-child(3) { color: var(--green); animation-delay: 0.15s; }
-    .mega span:nth-child(4) { color: var(--cyan); animation-delay: 0.2s; }
-    .mega span:nth-child(5) { color: var(--orange); animation-delay: 0.25s; }
-    .mega span:nth-child(6) { color: var(--violet); animation-delay: 0.3s; }
-    .mega span:nth-child(7) { color: var(--paper); animation-delay: 0.35s; }
 
     .subbrand {
       margin-top: 0.55rem;
@@ -155,8 +136,6 @@
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--mute);
-      opacity: 0;
-      animation: fadeUp 0.8s 0.55s ease forwards;
     }
 
     .hero-meta {
@@ -164,8 +143,6 @@
       gap: 1.25rem;
       margin-top: 2rem;
       max-width: 34rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.7s ease forwards;
     }
     @media (min-width: 720px) {
       .hero-meta {
@@ -192,13 +169,14 @@
       font-size: 0.95rem;
       letter-spacing: -0.01em;
       color: var(--ink);
-      background: var(--pink);
+      background: var(--paper);
+      border: 1px solid var(--paper);
       padding: 0.75rem 1.15rem;
-      transition: transform 0.2s ease, background 0.2s ease;
+      transition: background 0.2s ease, color 0.2s ease;
     }
     .cta-main:hover {
-      background: var(--green);
-      transform: translateY(-2px);
+      background: transparent;
+      color: var(--paper);
     }
     .cta-ghost {
       font-size: 0.75rem;
@@ -209,25 +187,6 @@
       padding-bottom: 0.15rem;
     }
     .cta-ghost:hover { color: var(--paper); border-color: var(--paper); }
-
-    .marquee-wrap {
-      border-block: 1px solid var(--line);
-      overflow: hidden;
-      background: rgba(12, 13, 11, 0.85);
-    }
-    .marquee {
-      display: flex;
-      width: max-content;
-      gap: 0;
-      animation: marquee 28s linear infinite;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--mute);
-      padding: 0.7rem 0;
-      white-space: nowrap;
-    }
-    .marquee span { padding-right: 2.5rem; }
 
     /* ── Sections ── */
     .block {
@@ -271,10 +230,7 @@
       width: 100%;
       height: auto;
       display: block;
-      transform: scale(1.01);
-      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .bleed:hover img { transform: scale(1.03); }
 
     /* Token specimen — horizontal type samples, not cards */
     .tokens {
@@ -291,7 +247,7 @@
       border-bottom: 1px solid var(--line);
       transition: padding-left 0.35s ease;
     }
-    .token:hover { padding-left: 0.75rem; }
+    .token:hover { padding-left: 0.5rem; }
     .token-name {
       font-family: var(--display);
       font-weight: 800;
@@ -312,9 +268,7 @@
       display: grid;
       align-content: center;
       padding: 5rem 1.25rem;
-      background:
-        radial-gradient(ellipse 70% 55% at 50% 40%, rgba(249, 38, 114, 0.1), transparent 60%),
-        var(--ink);
+      background: var(--ink);
       border-top: 1px solid var(--line);
     }
     .install-inner {
@@ -333,14 +287,14 @@
       font-size: clamp(0.85rem, 2vw, 1.05rem);
       transition: border-color 0.2s ease, background 0.2s ease;
     }
-    .terminal:hover { border-color: var(--pink); }
+    .terminal:hover { border-color: var(--focus); }
     .terminal .cmd { color: var(--green); }
     .terminal .pkg { color: var(--cyan); }
     .terminal .cursor {
       display: inline-block;
       width: 0.55em;
       height: 1.05em;
-      background: var(--pink);
+      background: var(--paper);
       margin-left: 0.15em;
       vertical-align: text-bottom;
       animation: blink 1.05s steps(1) infinite;
@@ -371,29 +325,14 @@
 
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .reveal.on {
       opacity: 1;
       transform: none;
     }
 
-    @keyframes letterIn {
-      to { opacity: 1; transform: none; }
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: none; }
-    }
-    @keyframes drift {
-      from { transform: scale(1.04) translate(0, 0); }
-      to { transform: scale(1.1) translate(-1.5%, -1.2%); }
-    }
-    @keyframes marquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
     @keyframes blink {
       0%, 50% { opacity: 1; }
       50.01%, 100% { opacity: 0; }
@@ -424,24 +363,15 @@
       </div>
 
       <div class="hero-main">
-        <h1 class="mega" aria-label="Monokai">
-          <span>M</span><span>O</span><span>N</span><span>O</span><span>K</span><span>A</span><span>I</span>
-        </h1>
+        <h1 class="mega" aria-label="Monokai">Monokai</h1>
         <p class="subbrand" data-i18n="brandLine">Modern Contrast</p>
 
         <div class="hero-meta">
-          <p class="lede" data-i18n="lede">The six colors stay where they belong. Everything else stays paper.</p>
+          <p class="lede" data-i18n="lede">Soft Monokai on near-black. Borders for structure. Nothing neon.</p>
           <div class="cta-row">
             <a class="cta-main" data-i18n="ctaPrimary" href="https://marketplace.visualstudio.com/items?itemName=AdrianTafoya.monokai-modern-contrast" target="_blank" rel="noopener">Install theme</a>
             <a class="cta-ghost" data-i18n="ctaGhost" href="#specimen">View specimen</a>
           </div>
-        </div>
-      </div>
-
-      <div class="marquee-wrap" aria-hidden="true">
-        <div class="marquee">
-          <span data-i18n="marquee">keyword #F92672 — string #E6DB74 — function #A6E22E — type #66D9EF — number #AE81FF — parameter #FD971F — comment #75715E —</span>
-          <span data-i18n="marquee">keyword #F92672 — string #E6DB74 — function #A6E22E — type #66D9EF — number #AE81FF — parameter #FD971F — comment #75715E —</span>
         </div>
       </div>
     </section>
@@ -450,7 +380,7 @@
       <p class="kicker reveal" data-i18n="previewLabel">01 / Specimen</p>
       <h2 class="display-title reveal" data-i18n="previewTitle">Code speaks.
 Chrome stays quiet.</h2>
-      <p class="copy reveal" data-i18n="previewCopy">Deeper than classic Monokai. Tabs and focus stay olive. Keyword pink is still the original.</p>
+      <p class="copy reveal" data-i18n="previewCopy">Deeper than classic Monokai. Clear borders. Keyword rose is softened — no fluorescence.</p>
     </section>
 
     <div class="bleed reveal">
@@ -461,12 +391,12 @@ Chrome stays quiet.</h2>
       <p class="kicker reveal" data-i18n="paletteLabel">02 / Tokens</p>
       <h2 class="display-title reveal" data-i18n="paletteTitle">Six. Nothing else.</h2>
       <div class="tokens reveal">
-        <div class="token"><span class="token-name" style="color:var(--pink)" data-i18n="tokenKeyword">keyword</span><span class="token-hex">#F92672</span></div>
-        <div class="token"><span class="token-name" style="color:var(--yellow)" data-i18n="tokenString">string</span><span class="token-hex">#E6DB74</span></div>
-        <div class="token"><span class="token-name" style="color:var(--green)" data-i18n="tokenFunction">function</span><span class="token-hex">#A6E22E</span></div>
-        <div class="token"><span class="token-name" style="color:var(--cyan)" data-i18n="tokenType">type</span><span class="token-hex">#66D9EF</span></div>
-        <div class="token"><span class="token-name" style="color:var(--violet)" data-i18n="tokenNumber">number</span><span class="token-hex">#AE81FF</span></div>
-        <div class="token"><span class="token-name" style="color:var(--orange)" data-i18n="tokenParameter">parameter</span><span class="token-hex">#FD971F</span></div>
+        <div class="token"><span class="token-name" style="color:var(--pink)" data-i18n="tokenKeyword">keyword</span><span class="token-hex">#C45B78</span></div>
+        <div class="token"><span class="token-name" style="color:var(--yellow)" data-i18n="tokenString">string</span><span class="token-hex">#B8AE6A</span></div>
+        <div class="token"><span class="token-name" style="color:var(--green)" data-i18n="tokenFunction">function</span><span class="token-hex">#8BAE5B</span></div>
+        <div class="token"><span class="token-name" style="color:var(--cyan)" data-i18n="tokenType">type</span><span class="token-hex">#6A9EAA</span></div>
+        <div class="token"><span class="token-name" style="color:var(--violet)" data-i18n="tokenNumber">number</span><span class="token-hex">#9580B8</span></div>
+        <div class="token"><span class="token-name" style="color:var(--orange)" data-i18n="tokenParameter">parameter</span><span class="token-hex">#C4895A</span></div>
       </div>
     </section>
 
@@ -496,9 +426,8 @@ Chrome stays quiet.</h2>
 
   <script src="./i18n.js"></script>
   <script>
-    MMC_I18N.init().then(() => {
-      document.getElementById("langToggle")?.addEventListener("click", () => MMC_I18N.toggle());
-    });
+    MMC_I18N.init();
+    document.getElementById("langToggle")?.addEventListener("click", () => MMC_I18N.toggle());
 
     const io = new IntersectionObserver(
       (entries) => {

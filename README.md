@@ -1,10 +1,10 @@
 # Monokai Modern Contrast
 
-Classic Monokai on the code. A quiet olive workbench around it.
+Near-black workbench with clear borders. Soft Monokai on the code — elegant, not neon.
 
 **Site:** https://adriantaf.github.io/monokai-modern-contrast/
 
-The six Monokai colors stay where they belong — keywords, strings, types, functions, numbers, parameters. Everything else stays paper. Chrome is olive, not neon.
+The six token colors keep their Monokai roles — keywords, strings, types, functions, numbers, parameters — at a calmer saturation. Chrome stays almost black; structure comes from borders.
 
 ![Preview](./res/screenshot.png)
 
@@ -18,25 +18,26 @@ ext install AdrianTafoya.monokai-modern-contrast
 
 ## vs classic Monokai
 
-- Editor `#1E1F1C`, sidebar `#1A1B17` — a step deeper than `#272822`, still olive
-- Tabs, badges, and focus stay in the brown-olive family (`#75715E` / `#99947C`)
-- Keyword pink is the original `#F92672`; operators and most identifiers stay `#F8F8F2`
-- Git marks and tree selection are muted so they do not compete with the code
+- Editor `#121212`, sidebar `#0e0e0e` — deeper than classic olive
+- Tabs, panels, and status bar use `#2c2c2c` borders for structure
+- Keyword rose is softened (`#C45B78`); operators and most identifiers stay `#E8E6E3`
+- Git marks and tree selection stay muted so they do not compete with the code
 
 ## Palette
 
 | Token | Hex | Used for |
 | --- | --- | --- |
-| Background | `#1A1B17` / `#1E1F1C` | Chrome / editor |
-| Foreground | `#F8F8F2` | Text, operators |
-| Keyword | `#F92672` | `if`, `class`, tags |
-| String | `#E6DB74` | Strings |
-| Function | `#A6E22E` | Functions, classes |
-| Type | `#66D9EF` | Types (italic) |
-| Number | `#AE81FF` | Numbers, booleans |
-| Parameter | `#FD971F` | Parameters (italic) |
-| Comment | `#75715E` | Comments |
-| Accent | `#75715E` | Badges, buttons |
+| Background | `#0E0E0E` / `#121212` | Chrome / editor |
+| Foreground | `#E8E6E3` | Text, operators |
+| Border | `#2C2C2C` | Workbench edges |
+| Keyword | `#C45B78` | `if`, `class`, tags |
+| String | `#B8AE6A` | Strings |
+| Function | `#8BAE5B` | Functions, classes |
+| Type | `#6A9EAA` | Types (italic) |
+| Number | `#9580B8` | Numbers, booleans |
+| Parameter | `#C4895A` | Parameters (italic) |
+| Comment | `#6E6B66` | Comments |
+| Accent | `#8A8680` | Focus, active tab |
 
 ## Recommended
 

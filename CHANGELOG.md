@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0
+
+- Near-black workbench (`#0e0e0e` / `#121212`) with clearer borders throughout
+- Softened syntax palette — same Monokai roles, no neon saturation
+- Quieter UI accents (focus, badges, status) so chrome stays out of the way
+
 ## 1.1.3
 
 - Update the Marketplace icon
