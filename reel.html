@@ -9,15 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@500;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ink: #0c0d0b;
-      --paper: #f8f8f2;
-      --mute: #8a8570;
-      --pink: #f92672;
-      --yellow: #e6db74;
-      --green: #a6e22e;
-      --cyan: #66d9ef;
-      --orange: #fd971f;
-      --violet: #ae81ff;
+      --ink: #080808;
+      --paper: #e8e6e3;
+      --mute: #9a9690;
+      --line: #2c2c2c;
+      --pink: #c45b78;
+      --yellow: #b8ae6a;
+      --green: #8bae5b;
+      --cyan: #6a9eaa;
+      --orange: #c4895a;
+      --violet: #9580b8;
       --display: "Syne", system-ui, sans-serif;
       --mono: "IBM Plex Mono", ui-monospace, monospace;
     }
@@ -45,9 +46,7 @@
       display: grid;
       place-items: center;
       text-align: center;
-      background:
-        radial-gradient(ellipse 70% 50% at 50% 45%, rgba(249,38,114,0.12), transparent 60%),
-        var(--ink);
+      background: var(--ink);
     }
     .mega {
       font-family: var(--display);
@@ -56,14 +55,8 @@
       line-height: 0.82;
       letter-spacing: -0.06em;
       text-transform: uppercase;
+      color: var(--paper);
     }
-    .mega span:nth-child(1) { color: var(--pink); }
-    .mega span:nth-child(2) { color: var(--yellow); }
-    .mega span:nth-child(3) { color: var(--green); }
-    .mega span:nth-child(4) { color: var(--cyan); }
-    .mega span:nth-child(5) { color: var(--orange); }
-    .mega span:nth-child(6) { color: var(--violet); }
-    .mega span:nth-child(7) { color: var(--paper); }
     .sub {
       margin-top: 0.6rem;
       font-family: var(--display);
@@ -86,19 +79,17 @@
     .slide-brand.active .tag { animation: up 0.7s 0.25s ease forwards; }
     .slide-brand.active .tag { animation-delay: 0.4s; }
 
-    .slide-hero { background: #0c0d0b; }
+    .slide-hero { background: var(--ink); }
     .slide-hero .bg {
       position: absolute;
       inset: 0;
       background: url("./res/hero.png") center/cover no-repeat;
-      filter: brightness(0.45) saturate(1.1);
-      transform: scale(1.05);
+      filter: brightness(0.4) saturate(0.85);
     }
-    .slide-hero.active .bg { animation: zoom 4.5s ease-out forwards; }
     .slide-hero .veil {
       position: absolute;
       inset: 0;
-      background: linear-gradient(90deg, rgba(12,13,11,0.92) 0%, rgba(12,13,11,0.45) 55%, transparent 100%);
+      background: linear-gradient(90deg, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.45) 55%, transparent 100%);
     }
     .slide-hero .copy {
       position: absolute;
@@ -145,7 +136,7 @@
     .frame {
       width: 100%;
       overflow: hidden;
-      border: 1px solid rgba(248,248,242,0.12);
+      border: 1px solid var(--line);
       opacity: 0;
       transform: translateY(18px) scale(0.985);
     }
@@ -157,9 +148,7 @@
       display: grid;
       place-items: center;
       text-align: center;
-      background:
-        radial-gradient(ellipse 55% 45% at 50% 45%, rgba(249,38,114,0.14), transparent 60%),
-        var(--ink);
+      background: var(--ink);
     }
     .slide-cta h2 {
       font-family: var(--display);
@@ -180,8 +169,8 @@
     .pill {
       display: inline-block;
       font-size: 1rem;
-      border: 1px solid rgba(248,248,242,0.14);
-      background: #1a1b17;
+      border: 1px solid var(--line);
+      background: #0e0e0e;
       padding: 1rem 1.35rem;
       color: var(--cyan);
       opacity: 0;
@@ -194,18 +183,15 @@
 
     @keyframes up { to { opacity: 1; transform: none; } }
     @keyframes upScale { to { opacity: 1; transform: none; } }
-    @keyframes zoom { to { transform: scale(1.12); } }
   </style>
 </head>
 <body>
   <div class="stage" id="stage">
     <div class="slide slide-brand active" data-duration="3200">
       <div>
-        <div class="mega" aria-hidden="true">
-          <span>M</span><span>O</span><span>N</span><span>O</span><span>K</span><span>A</span><span>I</span>
-        </div>
+        <div class="mega" aria-hidden="true">Monokai</div>
         <p class="sub">Modern Contrast</p>
-        <p class="tag" data-i18n="reelTag">Classic Monokai. Quieter chrome.</p>
+        <p class="tag" data-i18n="reelTag">Soft Monokai. Near-black chrome.</p>
       </div>
     </div>
 
@@ -213,8 +199,8 @@
       <div class="bg"></div>
       <div class="veil"></div>
       <div class="copy">
-        <h2 data-i18n="reelHeroTitle" data-i18n-html>Pink where it matters.<br/>Chrome stays quiet.</h2>
-        <p data-i18n="reelHeroCopy">Classic keywords. Olive workbench. No extra neon.</p>
+        <h2 data-i18n="reelHeroTitle" data-i18n-html>Rose where it matters.<br/>Chrome stays quiet.</h2>
+        <p data-i18n="reelHeroCopy">Calm keywords. Dark workbench. No neon.</p>
       </div>
     </div>
 

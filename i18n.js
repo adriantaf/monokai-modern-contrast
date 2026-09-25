@@ -1,35 +1,30 @@
 /**
- * Locale by location: Spanish for Spanish-speaking countries, English otherwise.
- * Override: ?lang=es|en  or  localStorage key `mmc-lang`
+ * English by default. Spanish via ?lang=es, localStorage, or the language toggle.
  */
 (function (global) {
   const STORAGE_KEY = "mmc-lang";
-  const ES_COUNTRIES = new Set([
-    "ES", "MX", "AR", "CO", "CL", "PE", "VE", "EC", "GT", "CU",
-    "BO", "DO", "HN", "PY", "SV", "NI", "CR", "PA", "UY", "GQ", "PR",
-  ]);
 
   const strings = {
     es: {
       docTitle: "Monokai Modern Contrast",
       docDescription:
-        "Monokai clásico en el código. Workbench oliva, sin neón. Tema gratis para VS Code y Cursor.",
+        "Workbench casi negro con bordes claros. Sintaxis Monokai suave — elegante, sin neón. Tema gratis para VS Code y Cursor.",
       navIndex: "Índice",
       navPalette: "Paleta",
       navInstall: "Instalar",
       heroAria: "Inicio",
       heroImgAlt: "Editor con Monokai Modern Contrast",
       brandLine: "Modern Contrast",
-      lede: "Los seis colores donde pertenecen. El resto, papel.",
+      lede: "Monokai suave sobre casi negro. Bordes para estructura. Nada de neón.",
       ctaPrimary: "Instalar tema",
       ctaGhost: "Ver specimen",
       scrollHint: "Desplazar",
       marquee:
-        "keyword #F92672 — string #E6DB74 — function #A6E22E — type #66D9EF — number #AE81FF — parameter #FD971F — comment #75715E —",
+        "keyword #C45B78 — string #B8AE6A — function #8BAE5B — type #6A9EAA — number #9580B8 — parameter #C4895A — comment #6E6B66 —",
       previewLabel: "01 / Specimen",
       previewTitle: "El código habla.\nEl chrome calla.",
       previewCopy:
-        "Más profundo que el Monokai clásico. Tabs y foco en oliva. El rosa de keywords sigue siendo el original.",
+        "Más profundo que el Monokai clásico. Bordes claros. Rosa de keywords suavizado — sin fluorescencia.",
       previewImgAlt: "Captura de Monokai Modern Contrast en VS Code",
       paletteLabel: "02 / Tokens",
       paletteTitle: "Seis. Nada más.",
@@ -46,9 +41,9 @@
       footerBy: "MIT · Bektor",
       langSwitch: "EN",
       langSwitchAria: "Cambiar a inglés",
-      reelTag: "Monokai clásico. Chrome más silencioso.",
-      reelHeroTitle: "El rosa donde importa.<br/>El chrome, en silencio.",
-      reelHeroCopy: "Keywords clásicos. Workbench oliva. Sin neón de más.",
+      reelTag: "Monokai suave. Chrome casi negro.",
+      reelHeroTitle: "Rosa donde importa.<br/>El chrome, en silencio.",
+      reelHeroCopy: "Keywords calmados. Workbench oscuro. Sin neón.",
       reelCaption: "En VS Code / Cursor",
       reelPreviewAlt: "Vista previa del tema",
       reelCtaTitle: "Instálalo hoy.",
@@ -57,23 +52,23 @@
     en: {
       docTitle: "Monokai Modern Contrast",
       docDescription:
-        "Classic Monokai on the code. Quiet olive chrome. Free theme for VS Code and Cursor.",
+        "Near-black workbench with clear borders. Soft Monokai syntax — elegant, not neon. Free theme for VS Code and Cursor.",
       navIndex: "Index",
       navPalette: "Palette",
       navInstall: "Install",
       heroAria: "Home",
       heroImgAlt: "Editor with Monokai Modern Contrast",
       brandLine: "Modern Contrast",
-      lede: "The six colors stay where they belong. Everything else stays paper.",
+      lede: "Soft Monokai on near-black. Borders for structure. Nothing neon.",
       ctaPrimary: "Install theme",
       ctaGhost: "View specimen",
       scrollHint: "Scroll",
       marquee:
-        "keyword #F92672 — string #E6DB74 — function #A6E22E — type #66D9EF — number #AE81FF — parameter #FD971F — comment #75715E —",
+        "keyword #C45B78 — string #B8AE6A — function #8BAE5B — type #6A9EAA — number #9580B8 — parameter #C4895A — comment #6E6B66 —",
       previewLabel: "01 / Specimen",
       previewTitle: "Code speaks.\nChrome stays quiet.",
       previewCopy:
-        "Deeper than classic Monokai. Tabs and focus stay olive. Keyword pink is still the original.",
+        "Deeper than classic Monokai. Clear borders. Keyword rose is softened — no fluorescence.",
       previewImgAlt: "Screenshot of Monokai Modern Contrast in VS Code",
       paletteLabel: "02 / Tokens",
       paletteTitle: "Six. Nothing else.",
@@ -90,23 +85,15 @@
       footerBy: "MIT · Bektor",
       langSwitch: "ES",
       langSwitchAria: "Switch to Spanish",
-      reelTag: "Classic Monokai. Quieter chrome.",
-      reelHeroTitle: "Pink where it matters.<br/>Chrome stays quiet.",
-      reelHeroCopy: "Classic keywords. Olive workbench. No extra neon.",
+      reelTag: "Soft Monokai. Near-black chrome.",
+      reelHeroTitle: "Rose where it matters.<br/>Chrome stays quiet.",
+      reelHeroCopy: "Calm keywords. Dark workbench. No neon.",
       reelCaption: "In VS Code / Cursor",
       reelPreviewAlt: "Theme preview",
       reelCtaTitle: "Install it today.",
       reelCtaCopy: "Free on the Marketplace · MIT · Bektor",
     },
   };
-
-  function fromBrowser() {
-    const langs = [
-      ...(navigator.languages || []),
-      navigator.language || "",
-    ].map((l) => String(l).toLowerCase());
-    return langs.some((l) => l.startsWith("es")) ? "es" : "en";
-  }
 
   function fromQuery() {
     const q = new URLSearchParams(location.search).get("lang");
@@ -119,36 +106,6 @@
       const v = localStorage.getItem(STORAGE_KEY);
       if (v === "es" || v === "en") return v;
     } catch (_) {}
-    return null;
-  }
-
-  async function fromLocation() {
-    const controllers = [
-      async () => {
-        const res = await fetch("https://get.geojs.io/v1/ip/country.json", {
-          signal: AbortSignal.timeout(2500),
-        });
-        if (!res.ok) throw new Error("geojs");
-        const data = await res.json();
-        return String(data.country || data.country_code || "").toUpperCase();
-      },
-      async () => {
-        const res = await fetch("https://ipapi.co/country_code/", {
-          signal: AbortSignal.timeout(2500),
-        });
-        if (!res.ok) throw new Error("ipapi");
-        return (await res.text()).trim().toUpperCase();
-      },
-    ];
-
-    for (const fn of controllers) {
-      try {
-        const cc = await fn();
-        if (cc && /^[A-Z]{2}$/.test(cc)) {
-          return ES_COUNTRIES.has(cc) ? "es" : "en";
-        }
-      } catch (_) {}
-    }
     return null;
   }
 
@@ -201,21 +158,10 @@
     return setLang(cur === "es" ? "en" : "es", true);
   }
 
-  async function init() {
+  function init() {
     const forced = fromQuery() || fromStorage();
-    if (forced) {
-      apply(forced);
-      return forced;
-    }
-
-    apply(fromBrowser());
-
-    const byGeo = await fromLocation();
-    if (byGeo && !fromQuery() && !fromStorage()) {
-      apply(byGeo);
-      return byGeo;
-    }
-    return document.documentElement.dataset.lang || "en";
+    apply(forced || "en");
+    return forced || "en";
   }
 
   global.MMC_I18N = {
@@ -224,6 +170,5 @@
     apply,
     setLang,
     toggle,
-    fromBrowser,
   };
 })(window);
