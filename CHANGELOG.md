@@ -5,6 +5,7 @@
 - Near-black workbench (`#0e0e0e` / `#121212`) with clearer borders throughout
 - Softened syntax palette — same Monokai roles, no neon saturation
 - Quieter UI accents (focus, badges, status) so chrome stays out of the way
+- Higher contrast for gitignored / deemphasized explorer labels and related muted UI text
 
 ## 1.1.3
 
